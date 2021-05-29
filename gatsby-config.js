@@ -3,6 +3,7 @@ module.exports = {
     title: "waua-blog-gatsby",
   },
   plugins: [
+    "gatsby-plugin-typescript",
     "gatsby-plugin-netlify-cms",
     "gatsby-plugin-postcss",
     "gatsby-transformer-remark",
@@ -10,7 +11,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "pages",
-        path: "./src/pages/",
+        path: "./_posts/",
       },
       __key: "pages",
     },

@@ -15,14 +15,23 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.4.1",
     "gatsby": "^3.4.1",
     "gatsby-plugin-netlify-cms": "^5.6.0",
     "gatsby-plugin-postcss": "^4.6.0",
     "gatsby-source-filesystem": "^3.6.0",
     "gatsby-transformer-remark": "^4.3.0",
     "netlify-cms-app": "^2.15.11",
-    "postcss": "^8.3.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.1",
+    "@types/react": "^17.0.8",
+    "@types/react-dom": "^17.0.5",
+    "autoprefixer": "^10.2.6",
+    "gatsby-plugin-typescript": "^3.6.0",
+    "postcss": "^8.3.0",
+    "tailwindcss": "^2.1.2"
   }
 }
