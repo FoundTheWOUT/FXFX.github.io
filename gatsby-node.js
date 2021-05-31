@@ -1,51 +1,59 @@
 const path = require("path");
 const { createFilePath, createFileNode } = require(`gatsby-source-filesystem`);
 
-exports.createPages = ({ actions, graphql }) => {
+exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
 
-  const blogPostTemplate = path.resolve(`src/templates/post.js`);
-
-  return new Promise((resolve, reject) => {
-    resolve(
-      graphql(`
-        {
-          allMarkdownRemark(
-            sort: { order: DESC, fields: [frontmatter___date] }
-            limit: 1000
-          ) {
-            edges {
-              node {
-                fields {
-                  slug
-                }
-                frontmatter {
-                  title
-                }
-              }
+  const result = await graphql(`
+    {
+      allMarkdownRemark(
+        limit: 1000
+        sort: { order: DESC, fields: [frontmatter___date] }
+      ) {
+        edges {
+          node {
+            fields {
+              slug
+            }
+            frontmatter {
+              title
             }
           }
         }
-      `).then((result) => {
-        if (result.errors) {
-          console.log(result.errors);
-          return reject(result.errors);
-        }
+      }
+    }
+  `);
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    return;
+  }
 
-        const blogTemplate = path.resolve("./src/templates/post.js");
+  // create post-list pages
+  const posts = result.data.allMarkdownRemark.edges;
+  const postsPerPage = 3;
+  const numPages = Math.ceil(posts.length / postsPerPage);
+  Array.from({ length: numPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+      component: path.resolve("./src/templates/PostList.tsx"),
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        numPages,
+        currentPage: i + 1,
+      },
+    });
+  });
 
-        result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-          createPage({
-            path: node.fields.slug,
-            component: blogTemplate,
-            context: {
-              slug: node.fields.slug,
-            }, // additional data can be passed via context
-          });
-        });
-        return;
-      })
-    );
+  // create post pages
+  posts.forEach(({ node }) => {
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve("./src/templates/post.js"),
+      context: {
+        slug: node.fields.slug,
+      }, // additional data can be passed via context
+    });
   });
 };
 
