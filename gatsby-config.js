@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/blog",
   siteMetadata: {
     title: "waua-blog-gatsby",
   },
@@ -6,7 +7,26 @@ module.exports = {
     "gatsby-plugin-typescript",
     "gatsby-plugin-netlify-cms",
     "gatsby-plugin-postcss",
-    "gatsby-transformer-remark",
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: [
+          {
+            resolve: "./plugins/gatsby-remark-autolink-headers-local",
+            options: {
+              offsetY: "100",
+            },
+          },
+          // {
+          //   resolve: "gatsby-remark-autolink-headers",
+          //   options: {
+          //     offsetY: "100",
+          //     elements: [`h1`, `h2`],
+          //   },
+          // },
+        ],
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {

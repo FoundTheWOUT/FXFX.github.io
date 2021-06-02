@@ -10,7 +10,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop --host=0.0.0.0",
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "prepare": "husky install"
@@ -24,8 +24,10 @@
     "gatsby-plugin-layout": "^2.6.0",
     "gatsby-plugin-netlify-cms": "^5.6.0",
     "gatsby-plugin-postcss": "^4.6.0",
+    "gatsby-remark-autolink-headers": "^4.3.0",
     "gatsby-source-filesystem": "^3.6.0",
     "gatsby-transformer-remark": "^4.3.0",
+    "highlight.js": "^11.0.0",
     "netlify-cms-app": "^2.15.11",
     "nightwind": "^1.1.11",
     "react": "^17.0.1",
