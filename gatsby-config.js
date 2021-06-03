@@ -11,19 +11,19 @@ module.exports = {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          {
-            resolve: "./plugins/gatsby-remark-autolink-headers-local",
-            options: {
-              offsetY: "100",
-            },
-          },
           // {
-          //   resolve: "gatsby-remark-autolink-headers",
+          //   resolve: "./plugins/gatsby-remark-autolink-headers-local",
           //   options: {
           //     offsetY: "100",
-          //     elements: [`h1`, `h2`],
           //   },
           // },
+          {
+            resolve: "gatsby-remark-autolink-headers",
+            options: {
+              offsetY: "100",
+              elements: [`h1`, `h2`],
+            },
+          },
         ],
       },
     },
