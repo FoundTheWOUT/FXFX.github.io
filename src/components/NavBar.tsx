@@ -19,12 +19,19 @@ function routeIcon(label: string) {
   }
 }
 
-const NavBar: FC = () => {
+interface NavBarProp {
+  show: boolean;
+}
+
+const NavBar: FC<NavBarProp> = (props) => {
+  let navClass =
+    "h-12 flex sticky top-0 backdrop-filter backdrop-blur-lg items-center justify-between w-full mb-4 text-2xl z-30 transition shadow";
+  // if (!props.show) navClass += " transform -translate-y-full";
   return (
-    <div className="flex sticky top-0 backdrop-filter backdrop-blur-lg items-center justify-between w-full mb-4 text-2xl z-30 border-b border-gray-200">
+    <div className={navClass}>
       <div className="mx-5 w-5"></div>
       <div className="flex flex-1 items-center justify-center md:justify-between">
-        <Link className="m-3" to="/blog">
+        <Link to="/">
           <span className="bg-gradient-to-tl from-gold to-purple-500 bg-clip-text text-transparent font-extrabold">
             FXFX.GRID
           </span>

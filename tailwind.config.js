@@ -18,6 +18,9 @@ module.exports = {
             img: {
               margin: "auto",
             },
+            a: {
+              transform: "translate(-100%,50%)",
+            },
           },
         },
         light: {
@@ -28,7 +31,7 @@ module.exports = {
                 color: theme("colors.gray.300"),
               },
               a: {
-                color: theme("colors.white"),
+                fill: theme("colors.white"),
               },
               strong: {
                 color: theme("colors.white"),

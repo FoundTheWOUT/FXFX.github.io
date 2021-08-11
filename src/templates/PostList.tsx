@@ -1,11 +1,13 @@
-import React, { FC } from "react";
+import React from "react";
 import { Link, graphql } from "gatsby";
 import Pagination from "../components/Pagination";
+import nightwind from "nightwind/helper";
 
 const PostList = (props) => {
   const postList = props.data.allMarkdownRemark.edges;
   return (
     <div>
+      <script dangerouslySetInnerHTML={{ __html: nightwind.init() }} />
       <div>
         {postList.map(({ node }, i) => (
           <Link

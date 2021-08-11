@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --header-height: 48px;
+    scroll-padding-top: calc(var(--header-height) + 10px);
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  a.anchor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-100%, 50%);
+    padding-right: 4px;
+  }
+}
