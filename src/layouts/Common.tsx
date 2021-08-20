@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
-import NavBar from "../components/NavBar";
-import SideBar from "../components/SideBar";
-// import BackGround from "../components/BackGround";
+import NavBar from "@/components/NavBar";
+import SideBar from "@/components/SideBar";
+// import BackGround from "@/components/BackGround";
 import { FaMonument } from "react-icons/fa";
 // import smoothscroll from "smoothscroll-polyfill";
 

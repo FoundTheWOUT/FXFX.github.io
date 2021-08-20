@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
-import Pagination from "../components/Pagination";
+import Pagination from "@/components/Pagination";
 import nightwind from "nightwind/helper";
 
 const PostList = (props) => {
