@@ -5,7 +5,6 @@ module.exports = {
   },
   plugins: [
     "gatsby-plugin-typescript",
-    "gatsby-plugin-netlify-cms",
     "gatsby-plugin-postcss",
     {
       resolve: "gatsby-transformer-remark",
