@@ -16,6 +16,7 @@ const Common: FC = (props) => {
   const [showNavBar, setNavBar] = useState(true);
   const onWheel = (e) => {
     if (e.deltaY > 10) {
+      setShowSideBar(false)
       setNavBar(false);
     } else if (e.deltaY < -5) {
       setNavBar(true);

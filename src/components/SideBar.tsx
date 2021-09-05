@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { Transition } from "react-transition-group";
 
 interface SideBarProps {
   show: boolean;
@@ -11,34 +12,51 @@ const rightRoute = [
 ];
 
 const SideBar: FC<SideBarProps> = (props) => {
-  let className =
-    "fixed top-0 transform h-screen w-3/5 bg-gray-500 transition duration-700 z-50";
-  let maskClass = "z-40 fixed top-0 h-full w-full bg-gray-300 transition";
-  if (!props.show) {
-    className += " -translate-x-full";
+  function hideBar(e) {
+    if (e.target.id == "SideBarOuter") props.setShowSideBar(false);
   }
-  props.show ? (maskClass += " opacity-60") : (maskClass += " hidden");
 
-  function hideBar() {
-    props.setShowSideBar(false);
-  }
+  const sideBarContent =
+    "transform transition-transform flex justify-center duration-500 flex-col items-center bg-white h-full mr-24";
+
+  const sideBarTransitionStyles = {
+    entering: { opacity: 1 },
+    entered: { opacity: 1 },
+    // exiting: { opacity: 0.8 },
+    exited: { display: "none", opacity: 0 },
+  };
+
+  const sideBarContentTransitionClass = {
+    entering: " -translate-x-full",
+    entered: "",
+    exiting: " -translate-x-full",
+    exited: " -translate-x-full",
+  };
 
   return (
-    <>
-      <div className={className}>
-        <div className="flex flex-col items-center mt-36 h-full">
-          <img
-            className="h-20 w-20 rounded-full object-cover"
-            src="/images/waua.jpg"
-          />
-          <span className="text-xl font-bold text-white">Waua</span>
-          {rightRoute.map((route) => (
-            <span key={route.label}>{route.label}</span>
-          ))}
+    <Transition in={props.show} timeout={300}>
+      {(state) => (
+        <div
+          id="SideBarOuter"
+          className="transition-opacity fixed top-0 h-full w-full bg-gray-500 z-50 bg-black bg-opacity-25"
+          onClick={hideBar}
+          style={{ ...sideBarTransitionStyles[state] }}
+        >
+          <div
+            className={sideBarContent + sideBarContentTransitionClass[state]}
+          >
+            <img
+              className="h-20 w-20 rounded-full object-cover"
+              src="/images/waua.jpg"
+            />
+            <span className="text-xl font-bold text-white">Waua</span>
+            {rightRoute.map((route) => (
+              <span key={route.label}>{route.label}</span>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className={maskClass} onClick={hideBar}></div>
-    </>
+      )}
+    </Transition>
   );
 };
 
