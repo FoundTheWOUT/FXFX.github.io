@@ -2,6 +2,7 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 import Pagination from "@/components/Pagination";
 import nightwind from "nightwind/helper";
+import TrackMouse from "@/components/TrackMouse";
 
 const PostList = (props) => {
   const postList = props.data.allMarkdownRemark.edges;
@@ -23,15 +24,19 @@ const PostList = (props) => {
                 />
               </div>
               <div className="h-36 w-full box-border px-3 absolute -bottom-10 md:-bottom-0 md:right-0 lg:right-0 md:h-3/5 md:w-3/5 ">
-                <div className="h-full p-3 bg-white bg-opacity-90 rounded-lg flex items-center justify-center group-hover:shadow-2xl transform group-hover:-translate-y-2 transition">
-                  <div className="w-full md:w-4/5">
-                    <h1 className="text-xl font-semibold text-black">
-                      {node.frontmatter.title}
-                    </h1>
-                    <span className="text-black">{node.frontmatter.date}</span>
-                    <p className="text-sm text-gray-500">{node.excerpt}</p>
+                <TrackMouse>
+                  <div className="h-full p-3 bg-white bg-opacity-90 rounded-lg flex items-center justify-center group-hover:shadow-2xl transform transition">
+                    <div className="w-full md:w-4/5">
+                      <h1 className="text-xl font-semibold text-black">
+                        {node.frontmatter.title}
+                      </h1>
+                      <span className="text-black">
+                        {node.frontmatter.date}
+                      </span>
+                      <p className="text-sm text-gray-500">{node.excerpt}</p>
+                    </div>
                   </div>
-                </div>
+                </TrackMouse>
               </div>
             </div>
           </Link>

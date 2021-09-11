@@ -19,6 +19,7 @@
     "@react-three/fiber": "^6.2.2",
     "@tailwindcss/typography": "^0.4.1",
     "@types/three": "^0.128.0",
+    "classnames": "^2.3.1",
     "gatsby": "^3.4.1",
     "gatsby-plugin-layout": "^2.6.0",
     "gatsby-plugin-postcss": "^4.6.0",
@@ -46,6 +47,6 @@
     "tailwindcss": "^2.1.2"
   },
   "lint-staged": {
-    "/src/**/*.{tsx,js,css,md}": "prettier --write"
+    "./src/**/*.{tsx,js,css,md}": "prettier --write"
   }
 }

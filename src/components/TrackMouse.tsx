@@ -5,7 +5,8 @@ const TrackMouse: FC<{ children: any; basie?: number }> = ({
   basie,
 }) => {
   const [style, setStyle] = useState({});
-  const b = Number.isNaN(basie) ? 10 : basie;
+  const b = Number.isNaN(basie) ? basie : 10;
+  const box = useRef(null);
 
   const handleMouseMove = (e) => {
     const {
@@ -13,13 +14,13 @@ const TrackMouse: FC<{ children: any; basie?: number }> = ({
       width: w,
       left: toL,
       top: toT,
-    } = e.target.getBoundingClientRect();
+    } = box.current.getBoundingClientRect();
 
     const center = [toL + w / 2, toT + h / 2];
     const _basie = [
       // get mouse position of relative to target Element.
-      (b * (e.pageX - center[0]) - w / 2) / w,
-      (b * (e.pageY - center[1]) - h / 2) / h,
+      (b * (e.clientX - center[0]) - w / 2) / w,
+      (b * (e.clientY - center[1]) - h / 2) / h,
     ];
     setStyle({
       transform: `translateX(${_basie[0]}px) translateY(${_basie[1]}px)`,
@@ -28,14 +29,15 @@ const TrackMouse: FC<{ children: any; basie?: number }> = ({
   const handleMouseLeave = () => {
     setStyle({
       transform: `translateX(0px) translateY(0px)`,
-      transition: "all 0.5s",
     });
   };
   return (
     <div
-      onMouseMove={handleMouseMove}
+      className="transition duration-75 h-full"
+      onMouseMoveCapture={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={style}
+      ref={box}
     >
       {children}
     </div>
