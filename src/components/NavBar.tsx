@@ -38,12 +38,11 @@ const NavBar: FC<NavBarProp> = (props) => {
         </Link>
         <div className="hidden md:flex items-center">
           {rightRoute.map((route) => (
-            <TrackMouse>
+            <TrackMouse key={route.label}>
               <HoverBG>
                 <Link
                   className="text-xl mx-2 text-black font-semibold flex items-center"
                   to={route.url}
-                  key={route.label}
                 >
                   {routeIcon(route.label)}
                   <span className="ml-2">{route.label}</span>

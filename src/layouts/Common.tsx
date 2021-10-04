@@ -16,7 +16,7 @@ const Common: FC = (props) => {
   const [showNavBar, setNavBar] = useState(true);
   const onWheel = (e) => {
     if (e.deltaY > 10) {
-      setShowSideBar(false)
+      setShowSideBar(false);
       setNavBar(false);
     } else if (e.deltaY < -5) {
       setNavBar(true);
@@ -27,7 +27,9 @@ const Common: FC = (props) => {
       {/* <BackGround /> */}
       <NavBar show={showNavBar} />
       <SideBar show={showSideBar} setShowSideBar={setShowSideBar} />
-      <div className="px-6 md:px-32 2xl:px-96">{props.children}</div>
+      <div className="flex items-center justify-center">
+        <div className="relative mx-6 md:mx-36">{props.children}</div>
+      </div>
       <div className="flex flex-col h-28 items-center justify-center text-xs text-gray-400">
         <div>
           Powered by{" "}
