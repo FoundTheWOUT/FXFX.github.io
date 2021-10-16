@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby";
 import Pagination from "@/components/Pagination";
 import nightwind from "nightwind/helper";
 import TrackMouse from "@/components/TrackMouse";
+import ImgLazy from "@/components/ImgLazy";
 
 const PostList = (props) => {
   const postList = props.data.allMarkdownRemark.edges;
@@ -18,10 +19,7 @@ const PostList = (props) => {
           >
             <div className="relative mb-20 h-60 shadow-2xl rounded-lg md:h-96 md:shadow-none">
               <div className="rounded-lg h-full w-full overflow-hidden md:w-3/5 md:h-4/5 md:shadow-lg lg:w-1/2">
-                <img
-                  className="h-full w-full object-cover"
-                  src={node.frontmatter.image}
-                />
+                <ImgLazy src={node.frontmatter.image} />
               </div>
               <div className="h-36 w-full box-border px-3 absolute -bottom-10 md:-bottom-0 md:right-0 lg:right-0 md:h-3/5 md:w-3/5 ">
                 <TrackMouse>

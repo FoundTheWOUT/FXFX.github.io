@@ -36,7 +36,7 @@ const Post = (props) => {
   };
 
   return (
-    <div ref={postRef} className="max-w-[1500px]">
+    <div ref={postRef}>
       <div className="prose dark:prose-light max-w-none w-full text-black">
         <h1>{title}</h1>
         <div
@@ -52,7 +52,7 @@ const Post = (props) => {
           activeId={CatalogActive}
           className="hidden lg:flex"
           headers={post.headings}
-        ></Catalog>
+        />
       </div>
     </div>
   );
