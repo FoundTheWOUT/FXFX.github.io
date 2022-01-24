@@ -23,17 +23,17 @@ const Archive = (props) => {
 
 export default Archive;
 
-export const ArchiveQuery = graphql`
-  query ArchiveQuery {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
-      edges {
-        node {
-          frontmatter {
-            date(formatString: "YYYY-MM-DD")
-            title
-          }
-        }
-      }
-    }
-  }
-`;
+// export const ArchiveQuery = graphql`
+//   query ArchiveQuery {
+//     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+//       edges {
+//         node {
+//           frontmatter {
+//             date(formatString: "YYYY-MM-DD")
+//             title
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;

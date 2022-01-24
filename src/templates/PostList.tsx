@@ -6,7 +6,7 @@ import TrackMouse from "@/components/TrackMouse";
 import ImgLazy from "@/components/ImgLazy";
 
 const PostList = (props) => {
-  const postList = props.data.allMarkdownRemark.edges;
+  const postList = props.data.allMdx.edges;
   return (
     <div>
       <script dangerouslySetInnerHTML={{ __html: nightwind.init() }} />
@@ -14,7 +14,7 @@ const PostList = (props) => {
         {postList.map(({ node }, i) => (
           <Link
             key={node.frontmatter.title}
-            to={node.fields.slug}
+            to={node.fields.path}
             className="group"
           >
             <div className="relative mb-20 h-60 shadow-2xl rounded-lg md:h-96 md:shadow-none">
@@ -49,15 +49,15 @@ export default PostList;
 
 export const ListQuery = graphql`
   query ListQuery($skip: Int!, $limit: Int!) {
-    allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date] }
+    allMdx(
+      sort: { order: DESC, fields: frontmatter___date }
       limit: $limit
       skip: $skip
     ) {
       edges {
         node {
           fields {
-            slug
+            path
           }
           excerpt(truncate: true, pruneLength: 50)
           frontmatter {

@@ -24,7 +24,7 @@ const Common: FC = (props) => {
       <NavBar show={showNavBar} />
       <SideBar show={showSideBar} setShowSideBar={setShowSideBar} />
       <div className="flex items-center justify-center">
-        <div className="relative px-2 w-full max-w-[1200px]">
+        <div className="relative px-2 w-full max-w-[80rem]">
           {props.children}
         </div>
       </div>

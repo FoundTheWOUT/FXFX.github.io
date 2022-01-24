@@ -6,17 +6,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const result = await graphql(`
     {
-      allMarkdownRemark(
-        limit: 1000
-        sort: { order: DESC, fields: [frontmatter___date] }
-      ) {
+      allMdx(sort: { fields: frontmatter___date, order: DESC }) {
         edges {
           node {
+            id
             fields {
-              slug
+              path
             }
             frontmatter {
               title
+            }
+            headings {
+              depth
+              value
             }
           }
         }
@@ -29,7 +31,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   // create post-list pages
-  const posts = result.data.allMarkdownRemark.edges;
+  const posts = result.data.allMdx.edges;
   const postsPerPage = 10;
   const numPages = Math.ceil(posts.length / postsPerPage);
   Array.from({ length: numPages }).forEach((_, i) => {
@@ -47,24 +49,29 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // create post pages
   posts.forEach(({ node }) => {
+    const fieldsPath = node.fields.path;
     createPage({
-      path: node.fields.slug,
-      component: path.resolve("./src/templates/Post.tsx"),
+      path: fieldsPath,
+      component: path.join(
+        __dirname,
+        `./_posts${fieldsPath.slice(0, fieldsPath.length - 1)}.md`
+      ),
       context: {
-        slug: node.fields.slug,
-      }, // additional data can be passed via context
+        id: node.id,
+        headings: node.headings,
+      },
     });
   });
 };
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
-  if (node.internal.type === `MarkdownRemark`) {
-    const slug = createFilePath({ node, getNode, basePath: `pages` });
+  if (node.internal.type === `Mdx`) {
+    const generatedPath = createFilePath({ node, getNode, basePath: `pages` });
     createNodeField({
       node,
-      name: `slug`,
-      value: slug,
+      name: "path",
+      value: generatedPath,
     });
   }
 };
