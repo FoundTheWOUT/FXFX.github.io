@@ -2,7 +2,7 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 
 const Archive = (props) => {
-  const archiveList = props.data.allMarkdownRemark.edges.map((edge) => {
+  const archiveList = props.data.allMdx.edges.map((edge) => {
     return {
       title: edge.node.frontmatter.title,
       date: edge.node.frontmatter.date,
@@ -23,17 +23,17 @@ const Archive = (props) => {
 
 export default Archive;
 
-// export const ArchiveQuery = graphql`
-//   query ArchiveQuery {
-//     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
-//       edges {
-//         node {
-//           frontmatter {
-//             date(formatString: "YYYY-MM-DD")
-//             title
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
+export const ArchiveQuery = graphql`
+  query ArchiveQuery {
+    allMdx(sort: { order: DESC, fields: frontmatter___date }) {
+      edges {
+        node {
+          frontmatter {
+            date(formatString: "YYYY-MM-DD")
+            title
+          }
+        }
+      }
+    }
+  }
+`;
