@@ -8,7 +8,7 @@
     "gatsby"
   ],
   "scripts": {
-    "start": "gatsby develop --host=0.0.0.0",
+    "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
@@ -18,20 +18,17 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "@react-three/drei": "^5.3.0",
-    "@react-three/fiber": "^6.2.2",
-    "@tailwindcss/typography": "^0.5.0",
+    "@tailwindcss/typography": "^0.5.2",
     "classnames": "^2.3.1",
-    "gatsby": "^4.5.4",
+    "gatsby": "^4.15.1",
     "gatsby-plugin-layout": "^3.5.0",
-    "gatsby-plugin-mdx": "^3.5.2",
+    "gatsby-plugin-mdx": "^3.15.0",
     "gatsby-plugin-page-creator": "^4.5.2",
+    "gatsby-plugin-pnpm": "^1.2.10",
     "gatsby-plugin-postcss": "^5.5.0",
-    "gatsby-remark-autolink-headers": "^5.5.0",
     "gatsby-source-filesystem": "^4.5.2",
     "gatsby-transformer-remark": "^5.5.2",
     "highlight.js": "^11.0.0",
-    "nightwind": "^1.1.11",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
@@ -39,17 +36,23 @@
     "tailwindcss": "^3.0.15"
   },
   "devDependencies": {
-    "@types/mdx-js__react": "^1.5.5",
     "@types/node": "^15.6.1",
     "@types/react": "^17.0.8",
     "@types/react-dom": "^17.0.5",
     "@types/react-transition-group": "^4.4.3",
     "autoprefixer": "^10.2.6",
+    "babel-eslint": "^10.1.0",
+    "dayjs": "^1.11.2",
     "enquirer": "^2.3.6",
+    "eslint": "^8.16.0",
+    "github-slugger": "^1.4.0",
+    "graphql": "^16.5.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
     "postcss": "^8.3.0",
-    "prettier": "^2.3.0"
+    "prettier": "^2.3.0",
+    "typescript": "^4.7.2",
+    "webpack": "^5.72.1"
   },
   "lint-staged": {
     "./src/**/*.{tsx,js,css,md}": "prettier --write"

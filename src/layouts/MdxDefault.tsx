@@ -2,22 +2,38 @@ import React, { useRef } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import Catalog from "@/components/Catalog";
 import MDXComponent from "@/components/MDXComponents";
+import { FaCalendarAlt } from "react-icons/fa";
+import dayjs from "dayjs";
 
 export default function MDXPage({ children, pageContext }) {
-  const { title } = pageContext.frontmatter;
+  const { title, date } = pageContext.frontmatter;
   const postRef = useRef(null);
 
   return (
-    <div ref={postRef} className="prose dark:prose-invert">
-      <h2>{title}</h2>
-      <div className="bg-white py-3 px-5 lg:px-20 shadow-lg rounded-lg">
-        <MDXProvider components={MDXComponent}>{children}</MDXProvider>
-      </div>
-      <Catalog
-        className="absolute right-0 top-16 transition hidden xl:flex flex-col"
-        headings={pageContext.headings}
-        postReference={postRef}
-      />
-    </div>
+    <main ref={postRef}>
+      <section className="lg:grid lg:grid-cols-8 my-2 lg:my-6">
+        <div className="lg:col-start-2 lg:col-span-6">
+          <h2 className="text-3xl font-bold mb-1">{title}</h2>
+          <div className="text-gray-500 text-sm ml-2">
+            <time className="flex items-center">
+              <FaCalendarAlt />
+              <span className="ml-1">{dayjs(date).format("YYYY-MM-DD")}</span>
+            </time>
+          </div>
+        </div>
+      </section>
+      <section className="lg:grid lg:grid-cols-8">
+        <article className="prose dark:prose-invert lg:col-span-6 lg:col-start-2 bg-white px-5 py-2 lg:px-10 shadow-lg rounded-lg">
+          <MDXProvider components={MDXComponent}>{children}</MDXProvider>
+        </article>
+        <aside className="ml-2 hidden xl:block w-80">
+          <Catalog
+            className="sticky flex flex-col top-16 w-full"
+            headings={pageContext.headings}
+            postReference={postRef}
+          />
+        </aside>
+      </section>
+    </main>
   );
 }

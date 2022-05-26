@@ -4,6 +4,7 @@ module.exports = {
     title: "waua-blog-gatsby",
   },
   plugins: [
+    "gatsby-plugin-pnpm",
     "gatsby-plugin-postcss",
     {
       resolve: "gatsby-source-filesystem",
@@ -26,14 +27,7 @@ module.exports = {
         defaultLayouts: {
           default: require.resolve(`./src/layouts/MdxDefault.tsx`),
         },
-        gatsbyRemarkPlugins: [
-          {
-            resolve: "gatsby-remark-autolink-headers",
-            options: {
-              offsetY: "100",
-            },
-          },
-        ],
+        gatsbyRemarkPlugins: [{ resolve: "gatsby-remark-header" }],
       },
     },
     {

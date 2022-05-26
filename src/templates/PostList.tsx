@@ -1,16 +1,14 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 import Pagination from "@/components/Pagination";
-import nightwind from "nightwind/helper";
 import TrackMouse from "@/components/TrackMouse";
 import ImgLazy from "@/components/ImgLazy";
 
-const PostList = (props) => {
-  const postList = props.data.allMdx.edges;
+const PostList = ({ data, pageContext }) => {
+  const postList = data.allMdx.edges;
   return (
-    <div>
-      <script dangerouslySetInnerHTML={{ __html: nightwind.init() }} />
-      <div>
+    <main>
+      <section>
         {postList.map(({ node }, i) => (
           <Link
             key={node.frontmatter.title}
@@ -39,9 +37,9 @@ const PostList = (props) => {
             </div>
           </Link>
         ))}
-      </div>
-      <Pagination pageContext={props.pageContext} />
-    </div>
+      </section>
+      <Pagination pageContext={pageContext} />
+    </main>
   );
 };
 

@@ -26,7 +26,6 @@ const Catalog = ({ headings, postReference, ...props }: CatalogProps) => {
     };
   });
 
-  const [CatalogOffset, SetCatalogOffset] = useState(0);
   const [CatalogActive, SetCatalogActive] = useState(null);
   useEffect(() => {
     document.addEventListener("scroll", handlePostWheel);
@@ -35,30 +34,27 @@ const Catalog = ({ headings, postReference, ...props }: CatalogProps) => {
     };
   }, [postReference]);
   const handlePostWheel = () => {
-    const { top } = postReference.current.getBoundingClientRect();
-    top < 0 ? SetCatalogOffset(-top) : SetCatalogOffset(0);
-
     for (let i = headings.length - 1; i >= 0; i--) {
       const headerTop = document
         .getElementById(headings[i].id)
         .getBoundingClientRect().top;
       if (headerTop <= 100) {
         SetCatalogActive(headings[i].id);
+        console.log(CatalogActive);
         break;
       }
     }
   };
 
   return (
-    <div
-      {...props}
-      style={{ transform: `translate(calc(100% + 10px),${CatalogOffset}px)` }}
-    >
+    <div className="flex flex-col" {...props}>
       {headings.map((header) => (
         <span
           className={classNames(
-            "my-1 border-l-2",
-            CatalogActive == header.id ? "border-gray-900" : "border-gray-300",
+            "my-1 transition",
+            CatalogActive == header.id
+              ? "border-gray-900 border-l-4"
+              : "border-gray-300 border-l-2",
             {
               "pl-[10px]": header.depth == 2,
               "pl-[20px]": header.depth == 3,
@@ -68,7 +64,15 @@ const Catalog = ({ headings, postReference, ...props }: CatalogProps) => {
           key={header.id}
         >
           <TrackMouse>
-            <a className="font-bold text-black" href={`#${header.id}`}>
+            <a
+              className={classNames(
+                "transition",
+                CatalogActive == header.id
+                  ? "text-gray-900 font-bold"
+                  : "text-gray-300"
+              )}
+              href={`#${header.id}`}
+            >
               {header.value}
             </a>
           </TrackMouse>

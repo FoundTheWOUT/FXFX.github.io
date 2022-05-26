@@ -20,7 +20,7 @@ module.exports = {
               margin: "auto",
             },
             a: {
-              transform: "translate(-100%,50%)",
+              textDecorationLine: "none",
             },
           },
         },
@@ -35,5 +35,5 @@ module.exports = {
       typography: ["dark"],
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("nightwind")],
+  plugins: [require("@tailwindcss/typography")],
 };

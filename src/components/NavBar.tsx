@@ -1,6 +1,5 @@
 import React from "react";
 import { FaAdjust, FaAddressCard, FaArchive } from "react-icons/fa";
-import nightwind from "nightwind/helper";
 import { Link } from "gatsby";
 import HoverBG from "./HoverBG";
 import TrackMouse from "./TrackMouse";
@@ -45,7 +44,7 @@ const NavBar = ({ show }: { show: boolean }) => (
     <HoverBG class="flex items-center h-8">
       <FaAdjust
         className="inline mx-2 w-5 h-5 cursor-pointer text-black"
-        onClick={() => nightwind.toggle()}
+        onClick={() => console.warn("TODO: toggle night")}
       />
     </HoverBG>
   </div>
