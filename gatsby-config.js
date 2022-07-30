@@ -25,7 +25,7 @@ module.exports = {
       options: {
         extensions: [".mdx", ".md"],
         defaultLayouts: {
-          default: require.resolve(`./src/layouts/MdxDefault.tsx`),
+          default: require.resolve(`./src/templates/MdxDefault.tsx`),
         },
         gatsbyRemarkPlugins: [{ resolve: "gatsby-remark-header" }],
       },

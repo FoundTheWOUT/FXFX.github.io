@@ -4,6 +4,7 @@ import { Link } from "gatsby";
 import HoverBG from "./HoverBG";
 import TrackMouse from "./TrackMouse";
 import classNames from "classnames";
+import NightSwitch from "./NightSwitch";
 
 const rightRoute = [
   { label: "About", url: "/about", icon: <FaAddressCard /> },
@@ -39,14 +40,11 @@ const NavBar = ({ show }: { show: boolean }) => (
             </HoverBG>
           </TrackMouse>
         ))}
+        <HoverBG>
+          <NightSwitch />
+        </HoverBG>
       </div>
     </div>
-    <HoverBG class="flex items-center h-8">
-      <FaAdjust
-        className="inline mx-2 w-5 h-5 cursor-pointer text-black"
-        onClick={() => console.warn("TODO: toggle night")}
-      />
-    </HoverBG>
   </div>
 );
 

@@ -10,11 +10,11 @@ export default function MDXPage({ children, pageContext }) {
   const postRef = useRef(null);
 
   return (
-    <main ref={postRef}>
+    <main ref={postRef} className="max-w-[80rem] mx-auto px-2">
       <section className="lg:grid lg:grid-cols-8 my-2 lg:my-6">
         <div className="lg:col-start-2 lg:col-span-6">
           <h2 className="text-3xl font-bold mb-1">{title}</h2>
-          <div className="text-gray-500 text-sm ml-2">
+          <div className="text-gray-500 text-sm ml-1">
             <time className="flex items-center">
               <FaCalendarAlt />
               <span className="ml-1">{dayjs(date).format("YYYY-MM-DD")}</span>

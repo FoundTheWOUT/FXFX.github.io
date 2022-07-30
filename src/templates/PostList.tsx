@@ -7,7 +7,7 @@ import ImgLazy from "@/components/ImgLazy";
 const PostList = ({ data, pageContext }) => {
   const postList = data.allMdx.edges;
   return (
-    <main>
+    <main className="mx-auto max-w-[80rem] px-2">
       <section>
         {postList.map(({ node }, i) => (
           <Link

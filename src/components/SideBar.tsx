@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { Transition, TransitionStatus } from "react-transition-group";
 import { Link } from "gatsby";
+import NightSwitch from "./NightSwitch";
 
 interface SideBarProps {
   show: boolean;
@@ -65,6 +66,7 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
                   </span>
                 </Link>
               ))}
+              <NightSwitch />
             </div>
           </aside>
         </>
