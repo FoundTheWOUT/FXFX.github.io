@@ -40,7 +40,6 @@ const Catalog = ({ headings, postReference, ...props }: CatalogProps) => {
         .getBoundingClientRect().top;
       if (headerTop <= 100) {
         SetCatalogActive(headings[i].id);
-        console.log(CatalogActive);
         break;
       }
     }
@@ -53,8 +52,8 @@ const Catalog = ({ headings, postReference, ...props }: CatalogProps) => {
           className={classNames(
             "my-1 transition",
             CatalogActive == header.id
-              ? "border-gray-900 border-l-4"
-              : "border-gray-300 border-l-2",
+              ? "border-gray-900 dark:border-gray-300 border-l-4"
+              : "border-gray-300 dark:border-gray-500 border-l-2",
             {
               "pl-[10px]": header.depth == 2,
               "pl-[20px]": header.depth == 3,
@@ -68,8 +67,8 @@ const Catalog = ({ headings, postReference, ...props }: CatalogProps) => {
               className={classNames(
                 "transition",
                 CatalogActive == header.id
-                  ? "text-gray-900 font-bold"
-                  : "text-gray-300"
+                  ? "text-gray-900 dark:text-gray-300 font-bold"
+                  : "text-gray-300 dark:text-gray-500"
               )}
               href={`#${header.id}`}
             >

@@ -5,7 +5,15 @@ const HoverBG = ({
   children,
   ...props
 }: PropsWithChildren<{ class?: string }>) => {
-  const c = classNames("rounded-md hover:bg-gray-300 transition", props.class);
-  return <div className={c}>{children}</div>;
+  return (
+    <div
+      className={classNames(
+        "rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition",
+        props.class
+      )}
+    >
+      {children}
+    </div>
+  );
 };
 export default HoverBG;

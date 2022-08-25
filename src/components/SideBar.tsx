@@ -10,18 +10,12 @@ interface SideBarProps {
 }
 
 const rightRoute = [
+  { label: "Home", url: "/" },
   { label: "About", url: "/about" },
   { label: "Archive", url: "/archive" },
 ];
 
 const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
-  function hideBar(e: React.MouseEvent) {
-    if (e.target === e.currentTarget) setShowSideBar(false);
-  }
-
-  const sideBarContent =
-    "transform transition-transform flex justify-center duration-500 flex-col items-center bg-white h-full mr-24";
-
   const sideBarTransitionStyles = {
     entering: { opacity: 0 },
     entered: { opacity: 1 },
@@ -36,7 +30,7 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
           {/* mask */}
           <div
             className={classNames(
-              "fixed top-0 transition-opacity duration-300 h-screen w-full bg-gray-500 bg-black bg-opacity-25 z-40",
+              "fixed top-0 transition-opacity duration-300 h-screen w-full bg-gray-500  bg-opacity-25 z-40",
               // show ? "opacity-100" : "opacity-0",
               {
                 // hidden: state === "exited",
@@ -53,20 +47,30 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
               }
             )}
           >
-            <div className="flex justify-center flex-col items-center h-full bg-white">
-              <img
-                className="h-20 w-20 rounded-full object-cover border"
-                src="/images/waua.jpg"
-              />
-              <span className="m-4 text-xl font-bold">Waua</span>
-              {rightRoute.map((route) => (
-                <Link to={route.url} key={route.label} onClick={hideBar}>
-                  <span data-hide key={route.label}>
-                    {route.label}
-                  </span>
-                </Link>
-              ))}
-              <NightSwitch />
+            <div className="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-700 dark:text-white gap-4">
+              <div className="ring ring-gray-300 dark:ring-gray-500 rounded-full w-48 h-48 flex flex-col items-center justify-center">
+                <img
+                  className="h-20 w-20 rounded-full object-cover border translate-y-5"
+                  src="/images/waua.webp"
+                />
+                <span className="m-4 text-xl font-bold translate-y-5">
+                  Waua
+                </span>
+              </div>
+              <div className="flex flex-col gap-2 items-center">
+                {rightRoute.map((route) => (
+                  <Link
+                    to={route.url}
+                    key={route.label}
+                    onClick={() => setShowSideBar(false)}
+                  >
+                    <span data-hide key={route.label}>
+                      {route.label}
+                    </span>
+                  </Link>
+                ))}
+                <NightSwitch />
+              </div>
             </div>
           </aside>
         </>

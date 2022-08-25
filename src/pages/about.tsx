@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 
 const About: FC = () => {
   return (
-    <div className="h-full flex items-center justify-center">
+    <div className="flex items-center justify-center flex-1">
       <div className="flex flex-col gap-4">
         {/* header */}
         <div className="flex">
@@ -13,7 +13,7 @@ const About: FC = () => {
             src="/images/waua.webp"
             alt="avatar"
           />
-          <div className="flex flex-col">
+          <div className="flex flex-col dark:text-white">
             <div className="mb-auto">
               <div className="font-bold text-lg leading-4 mb-1">Waua</div>
               <div className="text-sm leading-3">Frontend Developer</div>

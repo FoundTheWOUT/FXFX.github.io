@@ -14,7 +14,7 @@ const rightRoute = [
 const NavBar = ({ show }: { show: boolean }) => (
   <div
     className={classNames(
-      "h-12 flex sticky top-0 backdrop-filter backdrop-blur-lg items-center justify-between w-full mb-4 text-2xl z-30 shadow px-6 transform transition-transform",
+      "h-12 flex sticky top-0 backdrop-filter backdrop-blur-lg items-center justify-between w-full mb-4 text-2xl z-30 shadow px-6 transform transition-transform dark:bg-gray-800",
       {
         "-translate-y-full": !show,
       }
@@ -26,21 +26,21 @@ const NavBar = ({ show }: { show: boolean }) => (
           FXFX.GRID
         </span>
       </Link>
-      <div className="hidden md:flex items-center">
+      <div className="hidden h-8 md:flex items-center">
         {rightRoute.map((route) => (
           <TrackMouse key={route.label}>
-            <HoverBG>
+            <HoverBG class="h-full">
               <Link
-                className="text-xl mx-2 text-black font-semibold flex items-center"
+                className="h-full text-xl mx-2 text-black font-semibold flex items-center gap-1 dark:text-white"
                 to={route.url}
               >
                 {route.icon}
-                <span className="ml-2">{route.label}</span>
+                <span>{route.label}</span>
               </Link>
             </HoverBG>
           </TrackMouse>
         ))}
-        <HoverBG>
+        <HoverBG class="p-2">
           <NightSwitch />
         </HoverBG>
       </div>
