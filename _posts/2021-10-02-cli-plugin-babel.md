@@ -5,7 +5,7 @@ update: 2021-08-10
 tag:
   - vue
   - babel
-image: https://source.unsplash.com/random
+image: /images/babel.png
 ---
 
 ​	在[`@vue/cli`](https://cli.vuejs.org/)生成的项目`vue2`项目中, 它会自动的帮助我们完成[`babel`](https://babeljs.io/)的配置. 而配置项则非常的简单, 就是使用了[`@vue/cli-plugin-babel`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel)则一插件, 这个插件是官方的`@vue/cli`插件. 该插件主要是对`babel`配置的封装, 让用户有开箱即用的`vue`开发体验. 本文会从该插件开启讨论, 并最终深入到`babel`以及一些`babel`插件.

@@ -8,7 +8,7 @@ import { NightSwitchContext, TDarkMode } from "@/components/NightSwitch";
 import { useMedia } from "react-use";
 import classNames from "classnames";
 
-const Common: FC = (props) => {
+const Layout: FC = (props) => {
   const [showSideBar, setShowSideBar] = useState(false);
   const triggerSideBar = () => {
     setShowSideBar(!showSideBar);
@@ -47,4 +47,4 @@ const Common: FC = (props) => {
   );
 };
 
-export default Common;
+export default Layout;

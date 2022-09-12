@@ -1,27 +1,26 @@
 const path = require("path");
-const { createFilePath } = require(`gatsby-source-filesystem`);
+const { compileMDXWithCustomOptions } = require(`gatsby-plugin-mdx`);
+const { remarkHeadingsPlugin } = require(`./plugins/remark-headings-plugin`);
+const GithubSlug = require("github-slugger");
+const slugger = new GithubSlug();
 
+const postTemplate = path.resolve(`./src/components/MDX/MDXLayout.tsx`);
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
 
   const result = await graphql(`
     {
-      allMdx(sort: { fields: frontmatter___date, order: DESC }) {
-        edges {
-          node {
-            id
-            fields {
-              path
-            }
-            frontmatter {
-              title
-            }
-            headings {
-              depth
-              value
-            }
+      allMdx {
+        nodes {
+          id
+          fields {
+            slug
+          }
+          internal {
+            contentFilePath
           }
         }
+        totalCount
       }
     }
   `);
@@ -31,49 +30,110 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   // create post-list pages
-  const posts = result.data.allMdx.edges;
-  const postsPerPage = 10;
-  const numPages = Math.ceil(posts.length / postsPerPage);
-  Array.from({ length: numPages }).forEach((_, i) => {
+  const totalPost = result.data.allMdx.totalCount;
+  const pagination = 10;
+  const postListPages = Math.ceil(totalPost / pagination);
+  for (let i = 0; i < postListPages; i++) {
     createPage({
       path: i === 0 ? `/` : `/${i + 1}`,
-      component: path.resolve("./src/templates/PostList.tsx"),
+      component: path.resolve("./src/components/PostList.tsx"),
       context: {
-        limit: postsPerPage,
-        skip: i * postsPerPage,
-        numPages,
+        limit: pagination,
+        skip: i * pagination,
+        postListPages,
         currentPage: i + 1,
       },
     });
-  });
+  }
 
   // create post pages
-  posts.forEach(({ node }) => {
-    const fieldsPath = node.fields.path;
+  const posts = result.data.allMdx.nodes;
+  posts.forEach((postNode) => {
     createPage({
-      path: fieldsPath,
-      component: path.join(
-        __dirname,
-        `./_posts${fieldsPath.slice(0, fieldsPath.length - 1)}.md`
-      ),
+      path: postNode.fields.slug,
+      component: `${postTemplate}?__contentFilePath=${postNode.internal.contentFilePath}`,
       context: {
-        id: node.id,
-        headings: node.headings,
+        id: postNode.id,
       },
     });
   });
 };
 
-exports.onCreateNode = ({ node, getNode, actions }) => {
+exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `Mdx`) {
-    const generatedPath = createFilePath({ node, getNode, basePath: `pages` });
     createNodeField({
       node,
-      name: "path",
-      value: generatedPath,
+      name: "slug",
+      value: slugger.slug(node.frontmatter.title),
     });
   }
+};
+
+exports.createSchemaCustomization = async ({
+  getNode,
+  getNodesByType,
+  pathPrefix,
+  reporter,
+  cache,
+  actions,
+  schema,
+  store,
+}) => {
+  const { createTypes } = actions;
+
+  const headingsResolver = schema.buildObjectType({
+    name: `Mdx`,
+    fields: {
+      headings: {
+        type: `[MdxHeading]`,
+        async resolve(mdxNode) {
+          const fileNode = getNode(mdxNode.parent);
+
+          if (!fileNode) {
+            return null;
+          }
+
+          const result = await compileMDXWithCustomOptions(
+            {
+              source: mdxNode.body,
+              absolutePath: fileNode.absolutePath,
+            },
+            {
+              pluginOptions: {},
+              customOptions: {
+                mdxOptions: {
+                  remarkPlugins: [remarkHeadingsPlugin],
+                },
+              },
+              getNode,
+              getNodesByType,
+              pathPrefix,
+              reporter,
+              cache,
+              store,
+            }
+          );
+
+          if (!result) {
+            return null;
+          }
+
+          return result.metadata.headings;
+        },
+      },
+    },
+  });
+
+  createTypes([
+    `
+      type MdxHeading {
+        value: String
+        depth: Int
+      }
+    `,
+    headingsResolver,
+  ]);
 };
 
 exports.onCreateWebpackConfig = ({ actions }) => {

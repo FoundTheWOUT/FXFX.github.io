@@ -1,7 +1,7 @@
 import React from "react";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
-import { MDXProviderComponentsProp } from "@mdx-js/react";
+// import { MD } from "@mdx-js/react";
 
 const Code = ({ children, ...props }) => {
   const highlighted = hljs.highlightAuto(children);
@@ -21,7 +21,7 @@ const ALink = ({ id }) => (
   </a>
 );
 
-const components: MDXProviderComponentsProp = {
+const components: any = {
   code: Code,
   h1: ({ ...props }) => {
     return <h1 className={HeaderClass} {...props} />;

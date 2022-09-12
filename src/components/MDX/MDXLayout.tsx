@@ -1,11 +1,14 @@
 import React, { useRef } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import Catalog from "@/components/Catalog";
-import MDXComponent from "@/components/MDXComponents";
+import MDXComponent from "./MDXComponents";
 import { FaCalendarAlt } from "react-icons/fa";
 import dayjs from "dayjs";
+import { graphql } from "gatsby";
 
-export default function MDXPage({ children, pageContext }) {
+const MDXPage = ({ children, pageContext, data }) => {
+  console.log(pageContext);
+  // TODO: remove dayjs
   const { title, date } = pageContext.frontmatter;
   const postRef = useRef(null);
 
@@ -36,4 +39,16 @@ export default function MDXPage({ children, pageContext }) {
       </section>
     </main>
   );
-}
+};
+
+export default MDXPage;
+
+export const query = graphql`
+  query ($id: String!) {
+    mdx(id: { eq: $id }) {
+      frontmatter {
+        title
+      }
+    }
+  }
+`;

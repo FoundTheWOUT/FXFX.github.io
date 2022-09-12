@@ -5,14 +5,14 @@ import TrackMouse from "@/components/TrackMouse";
 import ImgLazy from "@/components/ImgLazy";
 
 const PostList = ({ data, pageContext }) => {
-  const postList = data.allMdx.edges;
+  const postList = data.allMdx.nodes;
   return (
     <main className="mx-auto max-w-[80rem] px-2">
       <section>
-        {postList.map(({ node }, i) => (
+        {postList.map((node) => (
           <Link
             key={node.frontmatter.title}
-            to={node.fields.path}
+            to={node.fields.slug}
             className="group"
           >
             <div className="relative mb-20 h-60 shadow-2xl rounded-lg md:h-96 md:shadow-none">
@@ -48,23 +48,21 @@ const PostList = ({ data, pageContext }) => {
 export default PostList;
 
 export const ListQuery = graphql`
-  query ListQuery($skip: Int!, $limit: Int!) {
+  query ($skip: Int!, $limit: Int!) {
     allMdx(
       sort: { order: DESC, fields: frontmatter___date }
       limit: $limit
       skip: $skip
     ) {
-      edges {
-        node {
-          fields {
-            path
-          }
-          excerpt(truncate: true, pruneLength: 50)
-          frontmatter {
-            date(formatString: "YYYY-MM-DD")
-            title
-            image
-          }
+      nodes {
+        fields {
+          slug
+        }
+        excerpt(pruneLength: 50)
+        frontmatter {
+          date(formatString: "YYYY-MM-DD")
+          title
+          image
         }
       }
     }

@@ -1,0 +1,123 @@
+---
+title: bilibili-evolved-doc 改造记录 - 异步 MarkDown 加载
+date: 2022-09-11
+image: images/1662888107811.webp
+---
+
+最近发现 [bilibili-evolved-doc](bilibili-evolved-doc) 在加载一些较大 MarkDown 的时候会花费比较久的时间，便着手考虑能否优化一下。一开始想到的主要原因是网络问题，且得益于 React 18 的 [Suspense](https://reactjs.org/docs/react-api.html?#suspense) 组件，便没有进一步分析，直接开始了改造。但后来发现，真凶却另有其人……具体将在[真凶](#真凶)章节展开。
+
+## Next.js 使用 Suspense 组件
+
+根据 Next.js 文档，需要使用 Suspense 组件则需要使用 `dynamic` 函数把导入函数包裹一层。该函数返回的是一个 `Loadable Component`，将其直接放在 `Suspense` 下便可以轻松实现组件异步加载。
+
+## ❓ 真的那么轻松吗
+
+值得注意的是，在大部分 Next.js 的文档框架实践中，都把一个 MarkDown “当” 成一个 Page 组件，而非普通的组件。我们通常都使用各种各样的 markdown loader 把 MarkDown 转换成 Html，抑或是 JSX。而这个 JSX 将作为 Next.js 的一个页面的形式存在于 Next.js 的 App 中。那么问题来了，我们应该使用 `dynamic` 函数包裹谁呢，又文档得知，`dynamic` 显然不能用来包裹一个页面，其无疑是针对组件而言的。或许 Next.js 官方存在把整个 Page Lazy 的手段或者方法，但这显然不是我们想要的，我们想要的是组件异步加载，而非页面。这意味着页面中的边框，等除了*文章*的部分不会进入 `Suspense` 组件内。
+
+### 🔧 于是，我们就有了第一次框架的改造
+
+```text
+原先的目录结构
+pages/
+ | -- user/
+    | *.md
+ | -- developer/
+    | *.md
+  _app.tsx
+  ...
+```
+
+👇
+
+```text
+原先的目录结构
+docs/   <-- MarkDown全部迁移至此目录
+pages/
+ | -- docs/
+    [...slug].tsx
+  _app.tsx
+  ...
+```
+
+从原先每个 Markdown 文件作为一页，我们现在改用一个子路由 `docs` 来匹配所以的文档路径。在 `[...slug].tsx` 中根据路径信息动态加载 Markdown。
+
+为了方便，我们可以把 `dynamic` 函数直接写入配置文件内。
+
+```ts
+const RouteItem = {
+  title: "😊 欢迎使用",
+  path: "/docs/user",
+  Comp: dynamic(() => import("/docs/user/index.mdx"), {
+    suspense: true,
+  }) as typeof MDXProvider,
+};
+```
+
+这样，我们就可以在 `[...slug].tsx` 中使用该 Comp。
+
+## 问题出现
+
+如此的更改，还无疑问是一次 Break Change，那这次改造，果然，还是导致了一些问题。
+
+在原框架下，一个 MarkDown 文件作为一个 Page 组件，我们写了一些 mdx 插件以实现组件获取 MarkDown 中的 meta，heading 等。而这些插件的实现竟都是依赖于 Next.js Page 组件的设计而实现的 ¯\(°_o)/¯，这导致之前的插件**完全**失效。
+
+之前通过调查其它文档框架，发现其让 Next.js 获取 meta 和 heading 的方法是在 Page 组件中注入 getStaticProps。这样，整个 App 就可以通过 pageProps 获取相关的数据了。但框架改动后，MarkDown 不再是一个 Page 组件，而是一个货真价实的组件。而我们都知道，Next.js 中的 getStaticProps 是在服务端运行，且只有 Page 组件会执行，普通组件是不会执行的（突然想到了 Gatsby 的好，Gatsby 它真的……我哭死）。
+
+### 解决方案
+
+搜遍全网，也就找到[一篇文章](https://ash.gd/posts/2020-06-20-component-level-static-props-in-next-js)能看得懂的。其核心就是探讨该如何让 Next.js 获取组件级别的 `static props`。其中提到了两种方案。
+
+1. 使用 global 变量把数据提升到全局，然后我们就可以在整个 App 中访问到数据了
+2. 使用 `React.Context` 包裹应用，在组件内给整个 `Context` 提供数据，这样，只要在 `Context` 内的其它组件就都能访问到数据。
+
+考虑到我们的 Markdown 组件本身是由 loader 生成，而要修改它就只能从 mdx 插件或者 loader 动手，无疑方案一是更加方便的。即使它没有那么优雅，还可能带来一些其它的隐患，但方案一还是能较好和快捷的解决当下的问题。
+
+于是我便写了一个核心仅有几行的代码的 recama 插件。
+
+```js
+import { fromJs } from "esast-util-from-js";
+export default function liftUpProps(propsName = []) {
+  /**
+   * global.[prop] = prop
+   */
+  const template = (props) => `global.${props} = ${props}`;
+  return (ast) => {
+    propsName.forEach((prop) => {
+      ast.body.push(fromJs(template(prop)));
+    });
+  };
+}
+```
+
+这样非常的好懂，即在组件页面能注入像这样的代码。
+
+```js
+global.heading = heading;
+global.meta = meta;
+```
+
+这样，我们便可以其它的组件内，通过 `windows.heading` 获取当前组件的标题
+
+> 题外话，我曾经想通过运行时的方法获取标题，但后来发现由于需要递归的去搜索所以符合的 DOM 节点，这样会导致非常严重的性能问题，故放弃了这条路。思考如何利用已经生成的数据无疑是更优解
+
+至此框架更改带来的问题就解决了。
+
+## 真凶
+
+在新框架即将完成之际，发现一些页面依然存在需要加载很久完成渲染，这让我非常疑惑，由于是在本地开发，网络应该不是问题才对，那到底是什么问题导致的呢。直到我打开了性能测试面板……
+
+![](https://drimagebed.oss-cn-shenzhen.aliyuncs.com/img/performance.webp)
+
+What，highlight 居然使用了这么长的时间。看来这才是问题的关键所在，现文档采用了客户端一次性的把代码进行高亮，然后重新填回页面。当一个 MarkDown 较大，代码内容较多时，这会花费巨量的时间，且由于没有对高亮进行优化，还要依赖于该库对语言进行检测，这必然使得性能下降严重。
+
+解决方法比较简单，我们只需把客户端高亮搬到编译 Markdown 时高亮即可，社区也有已经实现了相关的[插件](https://github.com/rehypejs/rehype-highlight)，直接使用即可。
+
+## 后记
+
+虽然这次颇有南辕北辙之味，但也不能说毫无意义。在解决了页面加载过久的问题下，还顺便把网络加载慢的问题给解决了~~（不是~~
+
+## 参考
+
+- [Component-level static props in Next.js - Jamstack](https://ash.gd/posts/2020-06-20-component-level-static-props-in-next-js)
+- [Suspense - React Doc](https://reactjs.org/docs/react-api.html#suspense)
+- [dynamic-import - Next.js](https://nextjs.org/docs/advanced-features/dynamic-import)
