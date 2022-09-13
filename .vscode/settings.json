@@ -1,6 +1,7 @@
 {
-    "cSpell.words": [
-        "frontmatter",
-        "treemate"
-    ]
+  "eslint.validate": ["markdown", "mdx"],
+  "eslint.options": {
+    "extensions": [".md", ".mdx"]
+  },
+  "cSpell.words": ["frontmatter", "treemate"]
 }

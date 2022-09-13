@@ -8,7 +8,10 @@ tag:
 image: /images/babel.png
 ---
 
-​	在[`@vue/cli`](https://cli.vuejs.org/)生成的项目`vue2`项目中, 它会自动的帮助我们完成[`babel`](https://babeljs.io/)的配置. 而配置项则非常的简单, 就是使用了[`@vue/cli-plugin-babel`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel)则一插件, 这个插件是官方的`@vue/cli`插件. 该插件主要是对`babel`配置的封装, 让用户有开箱即用的`vue`开发体验. 本文会从该插件开启讨论, 并最终深入到`babel`以及一些`babel`插件.
+在[`@vue/cli`](https://cli.vuejs.org/)生成的项目`vue2`项目中, 它会自动的帮助我们完成[`babel`](https://babeljs.io/)的配置.
+而配置项则非常的简单, 就是使用了[`@vue/cli-plugin-babel`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel)则一插件, 这个插件是官方的`@vue/cli`插件.
+该插件主要是对`babel`配置的封装, 让用户有开箱即用的`vue`开发体验.
+本文会从该插件开启讨论, 并最终深入到`babel`以及一些`babel`插件.
 
 与本文相关的包
 
@@ -34,7 +37,6 @@ image: /images/babel.png
         [
             "@babel/preset-env",
             {
-             	...
             }
         ]
     ]
@@ -64,4 +66,3 @@ image: /images/babel.png
 上文说明, 使用该插件后, 所有的`helpers`将会从`@babel/runtime`引用(预示着我们需要安装`@babel/runtime`, 文档中也指出我们需要把`@babel/runtime`安装到依赖项而非开发依赖, 这是因为需要保证使用该库的项目能正确的得到`helpers`引用).
 
 同时, 它还创建了一个沙盒环境, 防止了`core-js`和`@babel/polyfill`对全局作用域造成的污染.
-
