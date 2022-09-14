@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TrackMouse from "./TrackMouse";
 import GithubSlugger from "github-slugger";
 const slugger = new GithubSlugger();
@@ -16,38 +16,37 @@ type CatalogProps = JSX.IntrinsicElements["div"] & {
 };
 
 const Catalog = ({ headings, postReference, ...props }: CatalogProps) => {
-  // slugger.reset();
-
-  // headings = headings.map((header) => {
-  //   slugger.reset();
-  //   return {
-  //     ...header,
-  //     id: slugger.slug(header.value),
-  //   };
-  // });
+  const _headings = headings.map((header) => {
+    slugger.reset();
+    return {
+      ...header,
+      id: slugger.slug(header.value),
+    };
+  });
 
   const [CatalogActive, SetCatalogActive] = useState(null);
-  // useEffect(() => {
-  //   document.addEventListener("scroll", handlePostWheel);
-  //   return () => {
-  //     document.removeEventListener("scroll", handlePostWheel);
-  //   };
-  // }, [postReference]);
-  // const handlePostWheel = () => {
-  //   for (let i = headings.length - 1; i >= 0; i--) {
-  //     const headerTop = document
-  //       .getElementById(headings[i].id)
-  //       .getBoundingClientRect().top;
-  //     if (headerTop <= 100) {
-  //       SetCatalogActive(headings[i].id);
-  //       break;
-  //     }
-  //   }
-  // };
+  useEffect(() => {
+    document.addEventListener("scroll", handlePostWheel);
+    return () => {
+      document.removeEventListener("scroll", handlePostWheel);
+    };
+  }, [postReference]);
+  const handlePostWheel = () => {
+    for (let i = headings.length - 1; i >= 0; i--) {
+      const tocNode = document.getElementById(headings[i].id);
+      if (tocNode) {
+        const headerTop = tocNode.getBoundingClientRect().top;
+        if (headerTop <= 100) {
+          SetCatalogActive(headings[i].id);
+          break;
+        }
+      }
+    }
+  };
 
   return (
     <div className="flex flex-col" {...props}>
-      {[].map((header) => (
+      {_headings.map((header) => (
         <span
           className={classNames(
             "my-1 transition",

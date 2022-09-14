@@ -82,6 +82,8 @@ exports.createSchemaCustomization = async ({
 }) => {
   const { createTypes } = actions;
 
+  // this is a resolver generating headings from mdx at handling a GraphQL request phase,
+  // it providing data for the app.
   const headingsResolver = schema.buildObjectType({
     name: `Mdx`,
     fields: {

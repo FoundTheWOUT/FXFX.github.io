@@ -3,13 +3,13 @@ import { MDXProvider } from "@mdx-js/react";
 import Catalog from "@/components/Catalog";
 import MDXComponent from "./MDXComponents";
 import { FaCalendarAlt } from "react-icons/fa";
-import dayjs from "dayjs";
 import { graphql } from "gatsby";
 
-const MDXPage = ({ children, pageContext, data }) => {
-  console.log(pageContext);
-  // TODO: remove dayjs
-  const { title, date } = pageContext.frontmatter;
+const MDXPage = ({ children, data }) => {
+  const {
+    frontmatter: { title, date },
+    headings,
+  } = data.mdx;
   const postRef = useRef(null);
 
   return (
@@ -20,7 +20,7 @@ const MDXPage = ({ children, pageContext, data }) => {
           <div className="text-gray-500 text-sm ml-1">
             <time className="flex items-center">
               <FaCalendarAlt />
-              <span className="ml-1">{dayjs(date).format("YYYY-MM-DD")}</span>
+              <span className="ml-1">{date}</span>
             </time>
           </div>
         </div>
@@ -32,7 +32,7 @@ const MDXPage = ({ children, pageContext, data }) => {
         <aside className="ml-2 hidden xl:block w-80">
           <Catalog
             className="sticky flex flex-col top-16 w-full"
-            headings={pageContext.headings}
+            headings={headings}
             postReference={postRef}
           />
         </aside>
@@ -48,6 +48,11 @@ export const query = graphql`
     mdx(id: { eq: $id }) {
       frontmatter {
         title
+        date(formatString: "YYYY-MM-DD")
+      }
+      headings {
+        value
+        depth
       }
     }
   }

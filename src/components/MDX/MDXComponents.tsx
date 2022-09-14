@@ -1,6 +1,8 @@
 import React from "react";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
+import GitHubSlugger from "github-slugger";
+const slugger = new GitHubSlugger();
 // import { MD } from "@mdx-js/react";
 
 const Code = ({ children, ...props }) => {
@@ -12,6 +14,7 @@ const Code = ({ children, ...props }) => {
 
 const HeaderClass = "relative mt-2 group";
 
+// TODO: Alink as.
 const ALink = ({ id }) => (
   <a
     href={`#${id}`}
@@ -26,12 +29,17 @@ const components: any = {
   h1: ({ ...props }) => {
     return <h1 className={HeaderClass} {...props} />;
   },
-  h2: ({ ...props }) => (
-    <h2 className={HeaderClass} {...props}>
-      <ALink id={props.id} />
-      {props.children}
-    </h2>
-  ),
+  h2: ({ ...props }) => {
+    console.log(props);
+    // slugger.reset();
+    // const id = slugger.slug(props.children)
+    return (
+      <h2 className={HeaderClass} {...props}>
+        <ALink id={undefined} />
+        {props.children}
+      </h2>
+    );
+  },
   h3: ({ ...props }) => (
     <h3 className={HeaderClass} {...props}>
       <ALink id={props.id} />
