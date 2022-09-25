@@ -1,9 +1,9 @@
-const visit = require(`unist-util-visit`);
-const toString = require(`mdast-util-to-string`);
-const GithubSlug = require("github-slugger");
+import { visit } from "unist-util-visit";
+import { toString } from "mdast-util-to-string";
+import GithubSlug from "github-slugger";
 const slugger = new GithubSlug();
 
-exports.remarkHeadingsPlugin = function remarkHeadingsPlugin() {
+export default function remarkHeadingsPlugin() {
   return async function transformer(tree, file) {
     slugger.reset();
     let headings = [];
@@ -24,4 +24,4 @@ exports.remarkHeadingsPlugin = function remarkHeadingsPlugin() {
 
     mdxFile.data.meta.headings = headings;
   };
-};
+}

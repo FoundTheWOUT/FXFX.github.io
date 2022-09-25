@@ -49,13 +49,11 @@
     "graphql": "15.x.x",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
-    "mdast-util-to-string": "2",
     "postcss": "^8.3.0",
     "prettier": "^2.3.0",
     "react-use": "^17.4.0",
     "remark-gfm": "1",
     "typescript": "^4.7.2",
-    "unist-util-visit": "2",
     "webpack": "^5.72.1"
   },
   "lint-staged": {
@@ -65,6 +63,6 @@
     "node": ">=16.0.0"
   },
   "workspaces": [
-    "plugins/gatsby-remark-header"
+    "plugins/*"
   ]
 }

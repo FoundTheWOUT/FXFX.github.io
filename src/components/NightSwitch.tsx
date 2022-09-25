@@ -42,7 +42,7 @@ const NightSwitch = () => {
             { scheme: "dark", icon: <FaMoon />, text: "dark Mode" },
             { scheme: "system", icon: <FaLaptop />, text: "system Mode" },
           ].map((item) => (
-            <li>
+            <li key={item.scheme}>
               <Button
                 className="flex w-full items-center gap-2 p-1 px-2"
                 onClick={() => {

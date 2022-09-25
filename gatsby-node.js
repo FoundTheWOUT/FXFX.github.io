@@ -1,6 +1,6 @@
 const path = require("path");
 const { compileMDXWithCustomOptions } = require(`gatsby-plugin-mdx`);
-const { remarkHeadingsPlugin } = require(`./plugins/remark-headings-plugin`);
+const remarkHeadingsPlugin = require("./plugins/remark-headings-plugin");
 const GithubSlug = require("github-slugger");
 const slugger = new GithubSlug();
 

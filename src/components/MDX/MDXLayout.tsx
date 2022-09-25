@@ -33,7 +33,7 @@ const MDXPage = ({ children, data }) => {
           <Catalog
             ref={postRef}
             className="sticky flex flex-col top-16 w-full"
-            headings={headings}
+            headings={headings ?? []}
           />
         </aside>
       </section>
