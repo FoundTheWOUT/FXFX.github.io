@@ -1,5 +1,5 @@
 import React from "react";
-import { FaAdjust, FaAddressCard, FaArchive } from "react-icons/fa";
+import { FaAddressCard, FaArchive } from "react-icons/fa";
 import { Link } from "gatsby";
 import HoverBG from "./HoverBG";
 import TrackMouse from "./TrackMouse";

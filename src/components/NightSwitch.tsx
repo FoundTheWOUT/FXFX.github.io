@@ -45,7 +45,7 @@ const NightSwitch = () => {
         >
           <li
             className="flex items-center gap-2 cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-500 p-1 px-2 rounded-lg"
-            onClick={(e) => {
+            onClick={() => {
               setDarkMode("light");
               setShowSelector(!showSelector);
             }}
@@ -55,7 +55,7 @@ const NightSwitch = () => {
           </li>
           <li
             className="flex items-center gap-2 cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-500 p-1 px-2 rounded-lg"
-            onClick={(e) => {
+            onClick={() => {
               setDarkMode("dark");
               setShowSelector(!showSelector);
             }}
@@ -65,7 +65,7 @@ const NightSwitch = () => {
           </li>
           <li
             className="flex items-center gap-2 cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-500 p-1 px-2 rounded-lg"
-            onClick={(e) => {
+            onClick={() => {
               setDarkMode("system");
               setShowSelector(!showSelector);
             }}

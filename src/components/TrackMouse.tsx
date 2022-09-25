@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { useRef, useState, PropsWithChildren } from "react";
 
-const TrackMouse: FC<{ children: any; basie?: number }> = ({
+const TrackMouse = ({
   children,
   basie,
-}) => {
+}: PropsWithChildren<{ basie?: number }>) => {
   const [style, setStyle] = useState({});
   const b = Number.isNaN(basie) ? basie : 10;
   const box = useRef(null);

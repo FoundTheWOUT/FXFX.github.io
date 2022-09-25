@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FC } from "react";
-import { Transition, TransitionStatus } from "react-transition-group";
+import { Transition } from "react-transition-group";
 import { Link } from "gatsby";
 import NightSwitch from "./NightSwitch";
 
