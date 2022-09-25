@@ -10,5 +10,6 @@
   }
   html {
     font-family: "Inter", sans-serif;
+    @apply bg-gray-100;
   }
 }

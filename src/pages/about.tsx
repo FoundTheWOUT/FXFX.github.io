@@ -1,4 +1,3 @@
-import { Link } from "gatsby";
 import React, { FC } from "react";
 import { FaGithub } from "react-icons/fa";
 
@@ -19,9 +18,9 @@ const About: FC = () => {
               <div className="text-sm leading-3">Frontend Developer</div>
             </div>
             <div>
-              <Link to="https://github.com/FoundTheWOUT" target="_blank">
+              <a href="https://github.com/FoundTheWOUT" target="_blank">
                 <FaGithub />
-              </Link>
+              </a>
             </div>
           </div>
         </div>

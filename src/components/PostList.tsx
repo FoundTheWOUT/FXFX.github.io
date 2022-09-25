@@ -21,7 +21,7 @@ const PostList = ({ data, pageContext }) => {
               </div>
               <div className="h-36 w-full box-border px-3 absolute -bottom-10 md:-bottom-0 md:right-0 lg:right-0 md:h-3/5 md:w-3/5 ">
                 <TrackMouse>
-                  <div className="h-full p-3 bg-white dark:bg-gray-700 bg-opacity-90 rounded-lg flex items-center justify-center group-hover:shadow-2xl transform transition">
+                  <div className="h-full p-3 bg-white dark:bg-gray-700 bg-opacity-90 rounded-lg flex items-center justify-center group-hover:shadow-2xl dark:hover:shadow-gray-800 transform transition">
                     <div className="w-full md:w-4/5">
                       <h1 className="text-xl font-semibold text-black dark:text-white">
                         {node.frontmatter.title}
@@ -50,6 +50,7 @@ export default PostList;
 export const ListQuery = graphql`
   query ($skip: Int!, $limit: Int!) {
     allMdx(
+      filter: { frontmatter: { hide: { ne: true } } }
       sort: { order: DESC, fields: frontmatter___date }
       limit: $limit
       skip: $skip

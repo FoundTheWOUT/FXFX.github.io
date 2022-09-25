@@ -10,7 +10,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const result = await graphql(`
     {
-      allMdx {
+      allMdx(filter: { frontmatter: { hide: { ne: true } } }) {
         nodes {
           id
           fields {

@@ -48,7 +48,7 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
             )}
           >
             <div className="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-700 dark:text-white gap-4">
-              <div className="ring ring-gray-300 dark:ring-gray-500 rounded-full w-48 h-48 flex flex-col items-center justify-center">
+              <div className="w-48 h-48 flex flex-col items-center justify-center">
                 <img
                   className="h-20 w-20 rounded-full object-cover border translate-y-5"
                   src="/images/waua.webp"
