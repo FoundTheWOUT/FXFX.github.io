@@ -1,36 +1,22 @@
+import { header } from "@/types";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import TrackMouse from "./TrackMouse";
-import GithubSlugger from "github-slugger";
-const slugger = new GithubSlugger();
-
-interface header {
-  value: string;
-  depth: number;
-  id?: string;
-}
 
 type CatalogProps = JSX.IntrinsicElements["div"] & {
   headings: header[];
-  postReference: React.MutableRefObject<any>;
 };
 
-const Catalog = ({ headings, postReference, ...props }: CatalogProps) => {
-  const _headings = headings.map((header) => {
-    slugger.reset();
-    return {
-      ...header,
-      id: slugger.slug(header.value),
-    };
-  });
-
+const Catalog = React.forwardRef(({ headings, ...rest }: CatalogProps, ref) => {
   const [CatalogActive, SetCatalogActive] = useState(null);
+
   useEffect(() => {
     document.addEventListener("scroll", handlePostWheel);
     return () => {
       document.removeEventListener("scroll", handlePostWheel);
     };
-  }, [postReference]);
+  }, [ref]);
+
   const handlePostWheel = () => {
     for (let i = headings.length - 1; i >= 0; i--) {
       const tocNode = document.getElementById(headings[i].id);
@@ -45,8 +31,8 @@ const Catalog = ({ headings, postReference, ...props }: CatalogProps) => {
   };
 
   return (
-    <div className="flex flex-col" {...props}>
-      {_headings.map((header) => (
+    <div className="flex flex-col" {...rest}>
+      {headings.map((header) => (
         <span
           className={classNames(
             "my-1 transition",
@@ -78,5 +64,5 @@ const Catalog = ({ headings, postReference, ...props }: CatalogProps) => {
       ))}
     </div>
   );
-};
+});
 export default Catalog;

@@ -31,9 +31,9 @@ const MDXPage = ({ children, data }) => {
         </article>
         <aside className="ml-2 hidden xl:block w-80">
           <Catalog
+            ref={postRef}
             className="sticky flex flex-col top-16 w-full"
             headings={headings}
-            postReference={postRef}
           />
         </aside>
       </section>
@@ -51,6 +51,7 @@ export const query = graphql`
         date(formatString: "YYYY-MM-DD")
       }
       headings {
+        id
         value
         depth
       }

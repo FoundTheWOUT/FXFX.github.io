@@ -62,6 +62,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `Mdx`) {
+    // this create slug field for mdx node.
     createNodeField({
       node,
       name: "slug",
@@ -130,6 +131,7 @@ exports.createSchemaCustomization = async ({
   createTypes([
     `
       type MdxHeading {
+        id: String
         value: String
         depth: Int
       }

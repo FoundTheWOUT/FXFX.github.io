@@ -1,58 +1,44 @@
-import React from "react";
+import React, { createElement, PropsWithChildren } from "react";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
-import GitHubSlugger from "github-slugger";
-const slugger = new GitHubSlugger();
-// import { MD } from "@mdx-js/react";
+import type { MDXComponents } from "mdx/types";
 
-const Code = ({ children, ...props }) => {
-  const highlighted = hljs.highlightAuto(children);
+const Pre = ({ children }) => {
+  const { children: content, className } = children.props;
+  const code = className?.split("-")?.[1] ?? "text";
+  const highlighted = hljs.highlight(code, content);
   return (
-    <code {...props} dangerouslySetInnerHTML={{ __html: highlighted.value }} />
+    <pre>
+      <code dangerouslySetInnerHTML={{ __html: highlighted.value }} />
+    </pre>
   );
 };
 
-const HeaderClass = "relative mt-2 group";
+type HeaderProps = PropsWithChildren<{ as: string; id: string }>;
 
-// TODO: Alink as.
-const ALink = ({ id }) => (
-  <a
-    href={`#${id}`}
-    className="absolute -translate-x-full pr-1 opacity-0 group-hover:opacity-100 transition-opacity"
-  >
-    #
-  </a>
-);
+const ALink = ({ as, id, children }: HeaderProps) =>
+  createElement(as, {
+    id,
+    className: "relative mt-2 group",
+    children: (
+      <>
+        <a
+          href={`#${id}`}
+          className="absolute -translate-x-full pr-1 opacity-0 group-hover:opacity-100 transition-opacity"
+        >
+          #
+        </a>
+        {children}
+      </>
+    ),
+  });
 
-const components: any = {
-  code: Code,
-  h1: ({ ...props }) => {
-    return <h1 className={HeaderClass} {...props} />;
-  },
-  h2: ({ ...props }) => {
-    console.log(props);
-    // slugger.reset();
-    // const id = slugger.slug(props.children)
-    return (
-      <h2 className={HeaderClass} {...props}>
-        <ALink id={undefined} />
-        {props.children}
-      </h2>
-    );
-  },
-  h3: ({ ...props }) => (
-    <h3 className={HeaderClass} {...props}>
-      <ALink id={props.id} />
-      {props.children}
-    </h3>
-  ),
-  h4: ({ ...props }) => (
-    <h4 className={HeaderClass} {...props}>
-      <ALink id={props.id} />
-      {props.children}
-    </h4>
-  ),
-  pre: ({ ...props }) => <pre className="dark:bg-gray-800" {...props} />,
+const components: MDXComponents = {
+  h1: ({ ...props }: HeaderProps) => <ALink as="h1" {...props} />,
+  h2: ({ ...props }: HeaderProps) => <ALink as="h2" {...props} />,
+  h3: ({ ...props }: HeaderProps) => <ALink as="h3" {...props} />,
+  h4: ({ ...props }: HeaderProps) => <ALink as="h4" {...props} />,
+  pre: Pre,
   a: ({ ...props }) => (
     <a className="underline decoration-dashed underline-offset-4" {...props} />
   ),

@@ -21,6 +21,7 @@ module.exports = {
         mdxOptions: {
           remarkPlugins: [require("remark-gfm")],
         },
+        gatsbyRemarkPlugins: ["./plugins/gatsby-remark-header"],
       },
     },
     {

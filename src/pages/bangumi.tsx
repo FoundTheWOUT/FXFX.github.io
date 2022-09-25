@@ -1,5 +1,5 @@
 import TrackMouse from "@/components/TrackMouse";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 
 const bangumi: FC<null> = (props) => {
   const bangumis = [
