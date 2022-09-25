@@ -4,9 +4,9 @@ import "highlight.js/styles/atom-one-dark.css";
 import type { MDXComponents } from "mdx/types";
 
 const Pre = ({ children }) => {
-  const { children: content, className } = children.props;
-  const code = className?.split("-")?.[1] ?? "text";
-  const highlighted = hljs.highlight(code, content);
+  const { children: code, className } = children.props;
+  const lang = className?.split("-")?.[1] ?? "text";
+  const highlighted = hljs.highlight(code, { language: lang });
   return (
     <pre>
       <code dangerouslySetInnerHTML={{ __html: highlighted.value }} />
