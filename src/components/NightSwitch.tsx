@@ -1,13 +1,6 @@
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import classNames from "classnames";
-import React, {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useRef,
-  useState,
-} from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
 import { FaAdjust, FaLaptop, FaMoon, FaSun } from "react-icons/fa";
 import Button from "./styled/Button";
 
@@ -15,13 +8,13 @@ export type TColorScheme = "dark" | "light" | "system";
 
 export const NightSwitchContext = createContext<{
   scheme: TColorScheme;
-  setScheme: Dispatch<SetStateAction<TColorScheme>>;
+  setScheme: (scheme: TColorScheme) => void;
 }>(null);
 
 const NightSwitch = () => {
   const selector = useRef(null);
   const [showSelector, setShowSelector] = useState(false);
-  const { setScheme: setDarkMode } = useContext(NightSwitchContext);
+  const { setScheme } = useContext(NightSwitchContext);
 
   useOnClickOutside(selector, () => setShowSelector(false));
   return (
@@ -53,7 +46,7 @@ const NightSwitch = () => {
               <Button
                 className="flex w-full items-center gap-2 p-1 px-2"
                 onClick={() => {
-                  setDarkMode(item.scheme as TColorScheme);
+                  setScheme(item.scheme as TColorScheme);
                   setShowSelector(!showSelector);
                 }}
               >

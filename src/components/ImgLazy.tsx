@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import cn from "classnames";
 import React, { FC, useState } from "react";
 import "./ImgLazy.css";
 
@@ -7,10 +7,12 @@ const ImgLazy: FC<{ class?: string; src: string }> = (props) => {
   const handleOnLoad = () => {
     setLoading(false);
   };
-  const figureClass = classNames("w-full h-full", { loading: isLoading });
   return (
     <div className="w-full h-full">
-      <figure className={figureClass} hidden={!isLoading}></figure>
+      <figure
+        className={cn("w-full h-full", { loading: isLoading })}
+        hidden={!isLoading}
+      ></figure>
       <img
         className="h-full w-full object-cover"
         src={props.src}

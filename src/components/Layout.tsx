@@ -23,7 +23,10 @@ const Layout = (props: PropsWithChildren) => {
     <NightSwitchContext.Provider
       value={{
         scheme: colorScheme,
-        setScheme: setColorScheme,
+        setScheme: (scheme) => {
+          setColorScheme(scheme);
+          setShowSideBar(false);
+        },
       }}
     >
       <div
