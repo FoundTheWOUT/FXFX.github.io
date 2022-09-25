@@ -1,31 +1,36 @@
-import React, { FC, useState } from "react";
+import React, { PropsWithChildren, useState } from "react";
 import NavBar from "@/components/NavBar";
 import SideBar from "@/components/SideBar";
 // import BackGround from "@/components/BackGround";
 import { FaMonument } from "react-icons/fa";
 import Footer from "@/components/Footer";
-import { NightSwitchContext, TDarkMode } from "@/components/NightSwitch";
-import { useMedia } from "react-use";
+import { NightSwitchContext, TColorScheme } from "@/components/NightSwitch";
+import { useLocalStorage, useMedia } from "react-use";
 import classNames from "classnames";
 
-const Layout: FC = (props) => {
+const Layout = (props: PropsWithChildren) => {
   const [showSideBar, setShowSideBar] = useState(false);
   const triggerSideBar = () => {
     setShowSideBar(!showSideBar);
   };
   const isSystemDark = useMedia("(prefers-color-scheme: dark)");
-  const [darkMode, setDarkMode] = useState<TDarkMode>("system");
+  const [colorScheme, setColorScheme] = useLocalStorage<TColorScheme>(
+    "user-color-scheme",
+    "system"
+  );
 
   return (
     <NightSwitchContext.Provider
       value={{
-        dark: darkMode,
-        setDarkMode,
+        scheme: colorScheme,
+        setScheme: setColorScheme,
       }}
     >
       <div
         className={classNames({
-          dark: darkMode === "dark" || (darkMode === "system" && isSystemDark),
+          dark:
+            colorScheme === "dark" ||
+            (colorScheme === "system" && isSystemDark),
         })}
       >
         <div className="dark:bg-gray-900 min-h-screen">

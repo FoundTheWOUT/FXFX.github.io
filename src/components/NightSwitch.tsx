@@ -9,70 +9,59 @@ import React, {
   useState,
 } from "react";
 import { FaAdjust, FaLaptop, FaMoon, FaSun } from "react-icons/fa";
+import Button from "./styled/Button";
 
-export type TDarkMode = "dark" | "light" | "system";
+export type TColorScheme = "dark" | "light" | "system";
 
 export const NightSwitchContext = createContext<{
-  dark: TDarkMode;
-  setDarkMode: Dispatch<SetStateAction<TDarkMode>>;
+  scheme: TColorScheme;
+  setScheme: Dispatch<SetStateAction<TColorScheme>>;
 }>(null);
 
 const NightSwitch = () => {
   const selector = useRef(null);
   const [showSelector, setShowSelector] = useState(false);
-  const { setDarkMode } = useContext(NightSwitchContext);
+  const { setScheme: setDarkMode } = useContext(NightSwitchContext);
 
   useOnClickOutside(selector, () => setShowSelector(false));
   return (
     <>
-      <div className="flex items-center">
-        <FaAdjust
-          className="inline w-5 h-5 cursor-pointer text-black dark:text-white"
-          onClick={() => {
-            setShowSelector(!showSelector);
-          }}
-        />
-      </div>
+      <Button
+        className="flex items-center p-2"
+        onClick={() => {
+          setShowSelector(!showSelector);
+        }}
+      >
+        <FaAdjust className="inline w-5 h-5 text-black dark:text-white" />
+      </Button>
       <div className="relative dark:text-white">
         <ul
           ref={selector}
           className={classNames(
-            "absolute right-0 mx-2 mt-4 bg-white dark:bg-gray-700 text-sm rounded-lg p-1 border w-36 shadow-lg",
+            "absolute right-0 mx-2 mt-4 bg-white dark:bg-gray-800 text-sm rounded-lg p-1 w-36 shadow-lg",
             {
               hidden: !showSelector,
             }
           )}
         >
-          <li
-            className="flex items-center gap-2 cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-500 p-1 px-2 rounded-lg"
-            onClick={() => {
-              setDarkMode("light");
-              setShowSelector(!showSelector);
-            }}
-          >
-            <FaSun />
-            Light Mode
-          </li>
-          <li
-            className="flex items-center gap-2 cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-500 p-1 px-2 rounded-lg"
-            onClick={() => {
-              setDarkMode("dark");
-              setShowSelector(!showSelector);
-            }}
-          >
-            <FaMoon />
-            Dark Mode
-          </li>
-          <li
-            className="flex items-center gap-2 cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-500 p-1 px-2 rounded-lg"
-            onClick={() => {
-              setDarkMode("system");
-              setShowSelector(!showSelector);
-            }}
-          >
-            <FaLaptop />
-            Follow System
-          </li>
+          {[
+            { scheme: "light", icon: <FaSun />, text: "Light Mode" },
+            { scheme: "dark", icon: <FaMoon />, text: "dark Mode" },
+            { scheme: "system", icon: <FaLaptop />, text: "system Mode" },
+          ].map((item) => (
+            <li>
+              <Button
+                className="flex w-full items-center gap-2 p-1 px-2"
+                onClick={() => {
+                  setDarkMode(item.scheme as TColorScheme);
+                  setShowSelector(!showSelector);
+                }}
+              >
+                {item.icon}
+                {item.text}
+              </Button>
+            </li>
+          ))}
         </ul>
       </div>
     </>

@@ -1,4 +1,6 @@
-module.exports = function (options) {
+module.exports = async function (options) {
   // Note that `import()` caches, so this should be fast enough.
-  import("./main.mjs").then((module) => module.default.call(this, options));
+  await import("./main.mjs").then((module) =>
+    module.default.call(this, options)
+  );
 };

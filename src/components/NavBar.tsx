@@ -1,7 +1,7 @@
 import React from "react";
 import { FaAddressCard, FaArchive } from "react-icons/fa";
 import { Link } from "gatsby";
-import HoverBG from "./HoverBG";
+import Button from "./styled/Button";
 import TrackMouse from "./TrackMouse";
 import classNames from "classnames";
 import NightSwitch from "./NightSwitch";
@@ -29,7 +29,7 @@ const NavBar = ({ show }: { show: boolean }) => (
       <div className="hidden h-8 md:flex items-center">
         {rightRoute.map((route) => (
           <TrackMouse key={route.label}>
-            <HoverBG class="h-full">
+            <Button className="h-full">
               <Link
                 className="h-full text-xl mx-2 text-black font-semibold flex items-center gap-1 dark:text-white"
                 to={route.url}
@@ -37,12 +37,10 @@ const NavBar = ({ show }: { show: boolean }) => (
                 {route.icon}
                 <span>{route.label}</span>
               </Link>
-            </HoverBG>
+            </Button>
           </TrackMouse>
         ))}
-        <HoverBG class="p-2">
-          <NightSwitch />
-        </HoverBG>
+        <NightSwitch />
       </div>
     </div>
   </div>
