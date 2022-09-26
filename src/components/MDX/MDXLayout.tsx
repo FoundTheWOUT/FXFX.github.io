@@ -4,6 +4,7 @@ import Catalog from "@/components/Catalog";
 import MDXComponent from "./MDXComponents";
 import { FaCalendarAlt } from "react-icons/fa";
 import { graphql } from "gatsby";
+import SEO from "../Seo";
 
 const MDXPage = ({ children, data }) => {
   const {
@@ -42,6 +43,10 @@ const MDXPage = ({ children, data }) => {
 };
 
 export default MDXPage;
+
+export const Head = ({ pageContext }) => (
+  <SEO title={pageContext.frontmatter.title} />
+);
 
 export const query = graphql`
   query ($id: String!) {

@@ -3,6 +3,8 @@ import { Link, graphql } from "gatsby";
 import Pagination from "@/components/Pagination";
 import TrackMouse from "@/components/TrackMouse";
 import ImgLazy from "@/components/ImgLazy";
+import { useSiteMetadata } from "@/hooks/useSiteMeta";
+import SEO from "./Seo";
 
 const PostList = ({ data, pageContext }) => {
   const postList = data.allMdx.nodes;
@@ -46,6 +48,8 @@ const PostList = ({ data, pageContext }) => {
 };
 
 export default PostList;
+
+export const Head = () => <SEO />;
 
 export const ListQuery = graphql`
   query ($skip: Int!, $limit: Int!) {

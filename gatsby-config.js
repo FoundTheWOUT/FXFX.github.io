@@ -10,7 +10,8 @@ const wrapESMPlugin = (name) =>
 module.exports = {
   // pathPrefix: "/blog",
   siteMetadata: {
-    title: "waua-blog-gatsby",
+    title: "waua's blog",
+    siteUrl: `https://blog.drawki.top`,
   },
   plugins: [
     "gatsby-plugin-postcss",
