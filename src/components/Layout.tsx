@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import NavBar from "@/components/NavBar";
 import SideBar from "@/components/SideBar";
 // import BackGround from "@/components/BackGround";
@@ -8,21 +8,43 @@ import { NightSwitchContext, TColorScheme } from "@/components/NightSwitch";
 import { useLocalStorage, useMedia } from "react-use";
 import classNames from "classnames";
 
+const isBrowser = typeof window !== "undefined";
+
 const Layout = (props: PropsWithChildren) => {
   const [showSideBar, setShowSideBar] = useState(false);
   const triggerSideBar = () => {
     setShowSideBar(!showSideBar);
   };
-  const isSystemDark = useMedia("(prefers-color-scheme: dark)");
-  const [colorScheme, setColorScheme] = useLocalStorage<TColorScheme>(
-    "user-color-scheme",
-    "system"
+  const isSystemDark = useMedia(
+    "(prefers-color-scheme: dark)",
+    isBrowser ? undefined : true
   );
+  /**
+   * TODO: fix flash when client is 'light' mode.
+   * default scheme state to 'system', this can prevent mismatch of the SSG output and Client first load.
+   * later, in client side, we use the useEffect hook to reset the scheme state depend on localStorage.
+   * However, this causing the flashing when client side default to 'light' mode.
+   *
+   * reference: https://with-svelte.com/lessons/ssr-dark-mode
+   * */
+  const [localColorScheme, setLocalColorScheme] =
+    useState<TColorScheme>("system");
+  const [colorSchemeStorage, setColorSchemeStorage] =
+    useLocalStorage<TColorScheme>("user-color-scheme", "system");
+
+  const setColorScheme = (scheme: TColorScheme) => {
+    setColorSchemeStorage(scheme);
+    setLocalColorScheme(scheme);
+  };
+
+  useEffect(() => {
+    setColorScheme(colorSchemeStorage);
+  }, [colorSchemeStorage]);
 
   return (
     <NightSwitchContext.Provider
       value={{
-        scheme: colorScheme,
+        scheme: colorSchemeStorage,
         setScheme: (scheme) => {
           setColorScheme(scheme);
           setShowSideBar(false);
@@ -32,8 +54,8 @@ const Layout = (props: PropsWithChildren) => {
       <div
         className={classNames({
           dark:
-            colorScheme === "dark" ||
-            (colorScheme === "system" && isSystemDark),
+            localColorScheme === "dark" ||
+            (localColorScheme === "system" && isSystemDark),
         })}
       >
         <div className="dark:bg-gray-900 min-h-screen">
