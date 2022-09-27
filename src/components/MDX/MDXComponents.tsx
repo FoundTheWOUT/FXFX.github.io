@@ -42,6 +42,30 @@ const components: MDXComponents = {
   a: ({ ...props }) => (
     <a className="underline decoration-dashed underline-offset-4" {...props} />
   ),
+  img: (props) => {
+    const params = new URL(props.src).searchParams;
+    const zoom = params.get("zoom") ?? 100;
+    return (
+      <span>
+        <figure>
+          <img
+            src={props.src}
+            decoding="async"
+            alt={props.alt}
+            style={{ zoom: `${zoom}%` }}
+          />
+          {props.alt && (
+            <figcaption className="text-center text-xs">{props.alt}</figcaption>
+          )}
+        </figure>
+      </span>
+    );
+  },
+  code: (props) => (
+    <code className="text-purple-700 dark:text-purple-300 bg-gray-100 dark:bg-gray-700 rounded px-1">
+      {props.children}
+    </code>
+  ),
 };
 
 export default components;
