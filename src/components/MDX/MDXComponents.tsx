@@ -46,19 +46,17 @@ const components: MDXComponents = {
     const params = new URL(props.src).searchParams;
     const zoom = params.get("zoom") ?? 100;
     return (
-      <span>
-        <figure>
-          <img
-            src={props.src}
-            decoding="async"
-            alt={props.alt}
-            style={{ zoom: `${zoom}%` }}
-          />
-          {props.alt && (
-            <figcaption className="text-center text-xs">{props.alt}</figcaption>
-          )}
-        </figure>
-      </span>
+      <>
+        <img
+          src={props.src}
+          decoding="async"
+          alt={props.alt}
+          style={{ zoom: `${zoom}%` }}
+        />
+        {props.alt && (
+          <span className="text-xs block text-center mt-2">{props.alt}</span>
+        )}
+      </>
     );
   },
   code: (props) => (
