@@ -64,6 +64,9 @@ const components: MDXComponents = {
       {props.children}
     </code>
   ),
+  blockquote: (props) => (
+    <blockquote className="text-sm text-gray-500">{props.children}</blockquote>
+  ),
 };
 
 export default components;

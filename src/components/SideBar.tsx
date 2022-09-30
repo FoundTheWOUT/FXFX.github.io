@@ -41,10 +41,8 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
           />
           <aside
             className={classNames(
-              "fixed top-0 h-screen transform transition-transform w-80 z-50",
-              {
-                "-translate-x-full": !show,
-              }
+              "fixed top-0 -left-80 h-screen transform transition-transform w-80 z-50",
+              { "translate-x-full": show }
             )}
           >
             <div className="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-700 dark:text-white gap-4">
