@@ -12,8 +12,8 @@ const bangumi: FC<null> = (props) => {
   ];
   return (
     <div className="flex">
-      {bangumis.map((bgs) => (
-        <div className="m-4">
+      {bangumis.map((bgs, idx) => (
+        <div className="m-4" key={idx}>
           <TrackMouse>
             <img
               className="h-32 rounded-lg transition cursor-pointer hover:shadow-2xl"

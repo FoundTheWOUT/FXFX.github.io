@@ -13,3 +13,9 @@
     @apply bg-gray-100;
   }
 }
+
+@layer components {
+  .tag {
+    @apply flex items-center ring-1 rounded text-xs ring-gray-300 gap-1 px-2 py-1 bg-white dark:text-gray-400 dark:ring-gray-400 dark:bg-gray-800;
+  }
+}

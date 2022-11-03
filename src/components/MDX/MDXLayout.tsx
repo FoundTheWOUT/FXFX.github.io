@@ -2,13 +2,13 @@ import React, { useRef } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import Catalog from "@/components/Catalog";
 import MDXComponent from "./MDXComponents";
-import { FaCalendarAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaTag } from "react-icons/fa";
 import { graphql } from "gatsby";
 import SEO from "../Seo";
 
 const MDXPage = ({ children, data }) => {
   const {
-    frontmatter: { title, date },
+    frontmatter: { title, date, tags },
     headings,
   } = data.mdx;
   const postRef = useRef(null);
@@ -17,12 +17,21 @@ const MDXPage = ({ children, data }) => {
     <main ref={postRef} className="max-w-[80rem] mx-auto px-2">
       <section className="lg:grid lg:grid-cols-8 my-2 lg:my-6">
         <div className="lg:col-start-2 lg:col-span-6">
-          <h2 className="text-3xl font-bold mb-1 dark:text-white">{title}</h2>
-          <div className="text-gray-500 text-sm ml-1">
-            <time className="flex items-center">
+          <h2 className="text-3xl font-bold mb-2 dark:text-white">{title}</h2>
+          <div className="text-gray-500 text-sm ml-1 flex gap-2">
+            {/* Created Date */}
+            <time className="tag">
               <FaCalendarAlt />
-              <span className="ml-1">{date}</span>
+              <span>{date}</span>
             </time>
+            {/* Tags */}
+            {tags &&
+              tags.map((tag) => (
+                <div className="tag">
+                  <FaTag />
+                  {tag}
+                </div>
+              ))}
           </div>
         </div>
       </section>
@@ -54,6 +63,7 @@ export const query = graphql`
       frontmatter {
         title
         date(formatString: "YYYY-MM-DD")
+        tags
       }
       headings {
         id

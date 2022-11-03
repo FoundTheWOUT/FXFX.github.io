@@ -18,25 +18,25 @@ image: images/1662888107811.webp
 
 ```text
 原先的目录结构
-pages/
- | -- user/
-    | *.md
- | -- developer/
-    | *.md
-  _app.tsx
-  ...
+pages
+|-- _app.tsx
+|-- user
+|   |-- *.md
+|-- developer
+|   |-- *.md
+...
 ```
 
 👇
 
 ```text
 原先的目录结构
-docs/   <-- MarkDown全部迁移至此目录
-pages/
- | -- docs/
-    [...slug].tsx
-  _app.tsx
-  ...
+docs   <-- MarkDown全部迁移至此目录
+pages
+|-- _app.tsx
+|-- docs
+|   |-- [...slug].tsx
+...
 ```
 
 从原先每个 Markdown 文件作为一个页面，我们现在改用一个子路由 `docs` 来匹配所有的文档路径。在 `[...slug].tsx` 中根据路径信息动态加载 Markdown。

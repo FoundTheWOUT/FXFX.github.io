@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { Transition } from "react-transition-group";
 import { Link } from "gatsby";
 import NightSwitch from "./NightSwitch";
+import { StaticImage } from "gatsby-plugin-image";
 
 interface SideBarProps {
   show: boolean;
@@ -47,9 +48,10 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
           >
             <div className="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-700 dark:text-white gap-4">
               <div className="w-48 h-48 flex flex-col items-center justify-center">
-                <img
+                <StaticImage
                   className="h-20 w-20 rounded-full object-cover border translate-y-5"
-                  src="/images/waua.webp"
+                  src="https://www.gravatar.com/avatar/f5ac7b0d2a8c9ad1d58cf61edba08473"
+                  alt="avatar"
                 />
                 <span className="m-4 text-xl font-bold translate-y-5">
                   Waua

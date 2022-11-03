@@ -2,6 +2,7 @@ import React, { createElement, PropsWithChildren } from "react";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
 import type { MDXComponents } from "mdx/types";
+import { Link } from "gatsby";
 
 const Pre = ({ children }) => {
   const { children: code, className } = children.props;
@@ -39,9 +40,26 @@ const components: MDXComponents = {
   h3: ({ ...props }: HeaderProps) => <ALink as="h3" {...props} />,
   h4: ({ ...props }: HeaderProps) => <ALink as="h4" {...props} />,
   pre: Pre,
-  a: ({ ...props }) => (
-    <a className="underline decoration-dashed underline-offset-4" {...props} />
-  ),
+  a: ({ href, ...props }) => {
+    if (href.startsWith("http")) {
+      return (
+        <a
+          href={href}
+          target="_blank"
+          className="underline decoration-dashed underline-offset-4"
+          {...props}
+        />
+      );
+    }
+    return (
+      <Link
+        to={href}
+        className="underline decoration-dashed underline-offset-4"
+      >
+        {props.children}
+      </Link>
+    );
+  },
   img: (props) => {
     const params = new URL(props.src).searchParams;
     const zoom = params.get("zoom") ?? 100;
