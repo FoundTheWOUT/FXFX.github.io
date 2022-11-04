@@ -18,7 +18,7 @@ const MDXPage = ({ children, data }) => {
       <section className="lg:grid lg:grid-cols-8 my-2 lg:my-6">
         <div className="lg:col-start-2 lg:col-span-6">
           <h2 className="text-3xl font-bold mb-2 dark:text-white">{title}</h2>
-          <div className="text-gray-500 text-sm ml-1 flex gap-2">
+          <div className="text-gray-500 text-sm flex gap-2">
             {/* Created Date */}
             <time className="tag">
               <FaCalendarAlt />
