@@ -27,7 +27,7 @@ const MDXPage = ({ children, data }) => {
             {/* Tags */}
             {tags &&
               tags.map((tag) => (
-                <div className="tag">
+                <div className="tag" key={tag}>
                   <FaTag />
                   {tag}
                 </div>

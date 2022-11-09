@@ -63,6 +63,7 @@ exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `Mdx`) {
     // this create slug field for mdx node.
+    slugger.reset()
     createNodeField({
       node,
       name: "slug",

@@ -3,6 +3,7 @@ import React, { useRef, useState, PropsWithChildren } from "react";
 const TrackMouse = ({
   children,
   basie,
+  ...rest
 }: PropsWithChildren<{ basie?: number }>) => {
   const [style, setStyle] = useState({});
   const b = Number.isNaN(basie) ? basie : 10;
@@ -38,6 +39,7 @@ const TrackMouse = ({
       onMouseLeave={handleMouseLeave}
       style={style}
       ref={box}
+      {...rest}
     >
       {children}
     </div>
