@@ -1,13 +1,12 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 import Pagination from "@/components/Pagination";
-import TrackMouse from "@/components/TrackMouse";
 import SEO from "./Seo";
 
 const PostList = ({ data, pageContext }) => {
   const postList = data.allMdx.nodes;
   return (
-    <main className="mx-auto max-w-[80rem] px-2">
+    <main className="mx-auto max-w-[80rem]">
       <section>
         {postList.map((node) => (
           <Link
@@ -29,7 +28,7 @@ const PostList = ({ data, pageContext }) => {
                 )}
               </div>
               {/* title */}
-              <div className="h-36 w-full box-border px-3 absolute -bottom-10 md:-bottom-0 md:right-0 lg:right-0 md:h-3/5 md:w-3/5 ">
+              <div className="h-36 w-full box-border px-3 md:px-0 absolute -bottom-10 md:-bottom-0 md:right-0 lg:right-0 md:h-3/5 md:w-3/5 ">
                 <div className="h-full p-3 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center group-hover:shadow-2xl group-hover:-translate-y-5 group-active:shadow-none dark:hover:shadow-gray-800 transform transition">
                   <div className="w-full md:w-4/5">
                     <h1 className="text-xl font-semibold text-black dark:text-white">

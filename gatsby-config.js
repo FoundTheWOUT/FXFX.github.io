@@ -9,6 +9,7 @@ const wrapESMPlugin = (name) =>
 
 module.exports = {
   // pathPrefix: "/blog",
+  trailingSlash: "always",
   siteMetadata: {
     title: "waua's blog",
     siteUrl: `https://blog.drawki.top`,

@@ -5,6 +5,7 @@ import { FaMonument } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import { NightSwitchContext, TColorScheme } from "@/components/NightSwitch";
 import { useLocalStorage, useMedia } from "react-use";
+import classNames from "classnames";
 
 const isBrowser = typeof window !== "undefined";
 
@@ -53,9 +54,13 @@ const Layout = (props: PropsWithChildren) => {
         },
       }}
     >
-      <div className="dark:bg-gray-900 min-h-screen">
+      <div
+        className={classNames("dark:bg-gray-900 min-h-screen px-2", {
+          "h-screen overflow-hidden": showSideBar,
+        })}
+      >
         {/* <BackGround /> */}
-        <NavBar show={true} />
+        <NavBar />
         <SideBar show={showSideBar} setShowSideBar={setShowSideBar} />
         {props.children}
         <Footer />

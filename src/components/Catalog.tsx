@@ -11,24 +11,23 @@ const Catalog = React.forwardRef(({ headings, ...rest }: CatalogProps, ref) => {
   const [CatalogActive, SetCatalogActive] = useState(null);
 
   useEffect(() => {
+    const handlePostWheel = () => {
+      for (let i = headings.length - 1; i >= 0; i--) {
+        const tocNode = document.getElementById(headings[i].id);
+        if (tocNode) {
+          const headerTop = tocNode.getBoundingClientRect().top;
+          if (headerTop <= 100) {
+            SetCatalogActive(headings[i].id);
+            break;
+          }
+        }
+      }
+    };
     document.addEventListener("scroll", handlePostWheel);
     return () => {
       document.removeEventListener("scroll", handlePostWheel);
     };
   }, [ref]);
-
-  const handlePostWheel = () => {
-    for (let i = headings.length - 1; i >= 0; i--) {
-      const tocNode = document.getElementById(headings[i].id);
-      if (tocNode) {
-        const headerTop = tocNode.getBoundingClientRect().top;
-        if (headerTop <= 100) {
-          SetCatalogActive(headings[i].id);
-          break;
-        }
-      }
-    }
-  };
 
   return (
     <div className="flex flex-col" {...rest}>

@@ -14,7 +14,7 @@ const MDXPage = ({ children, data }) => {
   const postRef = useRef(null);
 
   return (
-    <main ref={postRef} className="max-w-[80rem] mx-auto px-2">
+    <main ref={postRef} className="max-w-[80rem] mx-auto">
       <section className="lg:grid lg:grid-cols-8 my-2 lg:my-6">
         <div className="lg:col-start-2 lg:col-span-6">
           <h2 className="text-3xl font-bold mb-2 dark:text-white">{title}</h2>

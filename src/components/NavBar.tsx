@@ -7,17 +7,15 @@ import classNames from "classnames";
 import NightSwitch from "./NightSwitch";
 
 const rightRoute = [
-  { label: "About", url: "/about", icon: <FaAddressCard /> },
   { label: "Archive", url: "/archive", icon: <FaArchive /> },
+  { label: "About", url: "/about", icon: <FaAddressCard /> },
 ];
 
-const NavBar = ({ show }: { show: boolean }) => (
+const NavBar = () => (
+  // TODO: restyle
   <div
     className={classNames(
-      "h-12 flex sticky top-0 backdrop-filter backdrop-blur-lg items-center justify-between w-full mb-4 text-2xl z-30 shadow px-6 transform transition-transform dark:bg-gray-800",
-      {
-        "-translate-y-full": !show,
-      }
+      "h-12 flex sticky top-4 mb-8 backdrop-filter backdrop-blur-lg items-center justify-between text-2xl z-30 shadow px-6 transform transition-transform dark:bg-gray-800 max-w-[80rem] mx-auto rounded-lg"
     )}
   >
     <div className="flex flex-1 items-center justify-center md:justify-between">
