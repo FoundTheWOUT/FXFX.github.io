@@ -3,5 +3,8 @@
   "eslint.options": {
     "extensions": [".md", ".mdx"]
   },
-  "cSpell.words": ["frontmatter", "treemate"]
+  "cSpell.words": ["frontmatter", "treemate"],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
 }

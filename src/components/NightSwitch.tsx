@@ -25,13 +25,13 @@ const NightSwitch = () => {
           setShowSelector(!showSelector);
         }}
       >
-        <FaAdjust className="inline w-5 h-5 text-black dark:text-white" />
+        <FaAdjust className="inline h-5 w-5 text-black dark:text-white" />
       </Button>
       <div className="relative dark:text-white">
         <ul
           ref={selector}
           className={classNames(
-            "absolute right-0 mx-2 mt-4 bg-white dark:bg-gray-800 text-sm rounded-lg p-1 w-36 shadow-lg",
+            "absolute right-0 mx-2 mt-4 w-36 rounded-lg bg-white p-1 text-sm shadow-lg dark:bg-gray-800",
             {
               hidden: !showSelector,
             }

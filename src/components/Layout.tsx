@@ -55,7 +55,7 @@ const Layout = (props: PropsWithChildren) => {
       }}
     >
       <div
-        className={classNames("dark:bg-gray-900 min-h-screen px-2", {
+        className={classNames("min-h-screen px-2 dark:bg-gray-900", {
           "h-screen overflow-hidden": showSideBar,
         })}
       >
@@ -66,10 +66,10 @@ const Layout = (props: PropsWithChildren) => {
         <Footer />
         {/* float icon */}
         <div
-          className="md:invisible fixed bottom-0 right-0 m-6 h-14 w-14 rounded-full bg-gradient-to-tr from-gold to-purple-500 flex items-center justify-center shadow-lg active:shadow-inner"
+          className="fixed bottom-0 right-0 m-6 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-gold to-purple-500 shadow-lg active:shadow-inner md:invisible"
           onClick={triggerSideBar}
         >
-          <FaMonument className="text-white text-2xl" />
+          <FaMonument className="text-2xl text-white" />
         </div>
       </div>
     </NightSwitchContext.Provider>

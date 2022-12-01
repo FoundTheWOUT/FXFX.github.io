@@ -8,9 +8,9 @@ const ImgLazy: FC<{ class?: string; src: string }> = (props) => {
     setLoading(false);
   };
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       <figure
-        className={cn("w-full h-full", { loading: isLoading })}
+        className={cn("h-full w-full", { loading: isLoading })}
         hidden={!isLoading}
       ></figure>
       <img

@@ -16,7 +16,7 @@ const bangumi: FC<null> = (props) => {
         <div className="m-4" key={idx}>
           <TrackMouse>
             <img
-              className="h-32 rounded-lg transition cursor-pointer hover:shadow-2xl"
+              className="h-32 cursor-pointer rounded-lg transition hover:shadow-2xl"
               src="https://source.unsplash.com/random"
             />
           </TrackMouse>

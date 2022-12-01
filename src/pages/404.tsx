@@ -4,7 +4,7 @@ import React from "react";
 import { FaArrowDown } from "react-icons/fa";
 
 const Error = () => (
-  <div className="h-[70vh] flex flex-col gap-4 justify-center items-center font-bold text-lg dark:text-white">
+  <div className="flex h-[70vh] flex-col items-center justify-center gap-4 text-lg font-bold dark:text-white">
     <div>
       404&nbsp;&nbsp;
       <span className="font-thin">|</span>&nbsp;&nbsp;❌ Not Found

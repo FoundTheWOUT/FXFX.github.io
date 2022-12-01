@@ -25,7 +25,7 @@ const ALink = ({ as, id, children }: HeaderProps) =>
       <>
         <a
           href={`#${id}`}
-          className="absolute -translate-x-full pr-1 opacity-0 group-hover:opacity-100 transition-opacity"
+          className="absolute -translate-x-full pr-1 opacity-0 transition-opacity group-hover:opacity-100"
         >
           #
         </a>
@@ -72,13 +72,13 @@ const components: MDXComponents = {
           style={{ zoom: `${zoom}%` }}
         />
         {props.alt && (
-          <span className="text-xs block text-center mt-2">{props.alt}</span>
+          <span className="mt-2 block text-center text-xs">{props.alt}</span>
         )}
       </>
     );
   },
   code: (props) => (
-    <code className="text-purple-700 dark:text-purple-300 bg-gray-100 dark:bg-gray-700 rounded px-1">
+    <code className="rounded bg-gray-100 px-1 text-purple-700 dark:bg-gray-700 dark:text-purple-300">
       {props.children}
     </code>
   ),

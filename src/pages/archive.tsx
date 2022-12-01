@@ -11,10 +11,10 @@ const Archive = ({ data }) => {
   });
 
   return (
-    <div className="max-w-[40rem] mx-auto flex flex-col gap-2 px-2">
+    <div className="mx-auto flex max-w-[40rem] flex-col gap-2 px-2">
       {archiveList.map((page) => (
         <Link to={`/${page.link}`} key={page.link}>
-          <div className="bg-white dark:bg-gray-800 dark:text-white shadow dark:hover:shadow-gray-800 p-4 rounded-lg hover:shadow-lg transition cursor-pointer select-none">
+          <div className="cursor-pointer select-none rounded-lg bg-white p-4 shadow transition hover:shadow-lg dark:bg-gray-800 dark:text-white dark:hover:shadow-gray-800">
             <div className="font-bold">{page.title}</div>
             <span className="text-sm">{page.date}</span>
           </div>

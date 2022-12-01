@@ -32,7 +32,7 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
         <div
           ref={nodeRef}
           className={classNames(
-            "fixed top-0 h-screen w-full bg-gray-500  bg-opacity-25 z-40"
+            "fixed top-0 z-40 h-screen w-full  bg-gray-500 bg-opacity-25"
           )}
           onClick={() => setShowSideBar(false)}
         />
@@ -40,20 +40,20 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
 
       <aside
         className={classNames(
-          "fixed top-0 -left-80 h-screen transform transition-transform w-80 z-50",
+          "fixed top-0 -left-80 z-50 h-screen w-80 transform transition-transform",
           { "translate-x-full": show }
         )}
       >
-        <div className="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-700 dark:text-white gap-4">
-          <div className="w-48 h-48 flex flex-col items-center justify-center">
+        <div className="flex h-full flex-col items-center justify-center gap-4 bg-white dark:bg-gray-700 dark:text-white">
+          <div className="flex h-48 w-48 flex-col items-center justify-center">
             <StaticImage
-              className="h-20 w-20 rounded-full object-cover border translate-y-5"
+              className="h-20 w-20 translate-y-5 rounded-full border object-cover"
               src="https://www.gravatar.com/avatar/f5ac7b0d2a8c9ad1d58cf61edba08473"
               alt="avatar"
             />
-            <span className="m-4 text-xl font-bold translate-y-5">Waua</span>
+            <span className="m-4 translate-y-5 text-xl font-bold">Waua</span>
           </div>
-          <div className="flex flex-col gap-2 items-center">
+          <div className="flex flex-col items-center gap-2">
             {rightRoute.map((route) => (
               <Link
                 to={route.url}

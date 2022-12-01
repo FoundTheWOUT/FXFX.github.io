@@ -34,7 +34,7 @@ const TrackMouse = ({
   };
   return (
     <div
-      className="transition duration-75 h-full"
+      className="h-full transition duration-75"
       onMouseMoveCapture={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={style}

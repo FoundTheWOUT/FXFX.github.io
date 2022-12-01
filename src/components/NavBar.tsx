@@ -15,21 +15,21 @@ const NavBar = () => (
   // TODO: restyle
   <div
     className={classNames(
-      "h-12 flex sticky top-4 mb-8 backdrop-filter backdrop-blur-lg items-center justify-between text-2xl z-30 shadow px-6 transform transition-transform dark:bg-gray-800 max-w-[80rem] mx-auto rounded-lg"
+      "sticky top-4 z-30 mx-auto mb-8 flex h-12 max-w-[80rem] transform items-center justify-between rounded-lg px-6 text-2xl shadow backdrop-blur-lg backdrop-filter transition-transform dark:bg-gray-800"
     )}
   >
     <div className="flex flex-1 items-center justify-center md:justify-between">
       <Link to="/">
-        <span className="bg-gradient-to-tl from-gold to-purple-500 bg-clip-text text-transparent font-extrabold">
+        <span className="bg-gradient-to-tl from-gold to-purple-500 bg-clip-text font-extrabold text-transparent">
           FXFX.GRID
         </span>
       </Link>
-      <div className="hidden h-8 md:flex items-center">
+      <div className="hidden h-8 items-center md:flex">
         {rightRoute.map((route) => (
           <TrackMouse key={route.label}>
             <Button className="h-full">
               <Link
-                className="h-full text-xl mx-2 text-black font-semibold flex items-center gap-1 dark:text-white"
+                className="mx-2 flex h-full items-center gap-1 text-xl font-semibold text-black dark:text-white"
                 to={route.url}
               >
                 {route.icon}

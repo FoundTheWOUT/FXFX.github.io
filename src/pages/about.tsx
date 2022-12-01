@@ -4,18 +4,18 @@ import { FaGithub } from "react-icons/fa";
 
 const About: FC = () => {
   return (
-    <div className="flex items-center justify-center flex-1">
+    <div className="flex flex-1 items-center justify-center">
       <div className="flex flex-col gap-4">
         {/* header */}
         <div className="flex">
           <StaticImage
-            className="h-16 w-16 rounded-full object-cover ring ring-purple-300 ring-offset-2 mr-4"
+            className="mr-4 h-16 w-16 rounded-full object-cover ring ring-purple-300 ring-offset-2"
             src="https://www.gravatar.com/avatar/f5ac7b0d2a8c9ad1d58cf61edba08473"
             alt="avatar"
           />
           <div className="flex flex-col dark:text-white">
             <div className="mb-auto">
-              <div className="font-bold text-lg leading-4 mb-1">Waua</div>
+              <div className="mb-1 text-lg font-bold leading-4">Waua</div>
               <div className="text-sm leading-3">Frontend Developer</div>
             </div>
             <div>

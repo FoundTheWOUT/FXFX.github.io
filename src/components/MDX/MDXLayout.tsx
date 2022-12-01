@@ -14,11 +14,11 @@ const MDXPage = ({ children, data }) => {
   const postRef = useRef(null);
 
   return (
-    <main ref={postRef} className="max-w-[80rem] mx-auto">
-      <section className="lg:grid lg:grid-cols-8 my-2 lg:my-6">
-        <div className="lg:col-start-2 lg:col-span-6">
-          <h2 className="text-3xl font-bold mb-2 dark:text-white">{title}</h2>
-          <div className="text-gray-500 text-sm flex gap-2">
+    <main ref={postRef} className="mx-auto max-w-[80rem]">
+      <section className="my-2 lg:my-6 lg:grid lg:grid-cols-8">
+        <div className="lg:col-span-6 lg:col-start-2">
+          <h2 className="mb-2 text-3xl font-bold dark:text-white">{title}</h2>
+          <div className="flex gap-2 text-sm text-gray-500">
             {/* Created Date */}
             <time className="tag">
               <FaCalendarAlt />
@@ -36,13 +36,13 @@ const MDXPage = ({ children, data }) => {
         </div>
       </section>
       <section className="lg:grid lg:grid-cols-8">
-        <article className="prose dark:prose-invert dark:bg-gray-800 lg:col-span-6 lg:col-start-2 bg-white p-5 lg:p-10 shadow-lg rounded-lg">
+        <article className="prose rounded-lg bg-white p-5 shadow-lg dark:prose-invert dark:bg-gray-800 lg:col-span-6 lg:col-start-2 lg:p-10">
           <MDXProvider components={MDXComponent}>{children}</MDXProvider>
         </article>
-        <aside className="ml-2 hidden xl:block w-80">
+        <aside className="ml-2 hidden w-80 xl:block">
           <Catalog
             ref={postRef}
-            className="sticky flex flex-col top-16 w-full"
+            className="sticky top-16 flex w-full flex-col"
             headings={headings ?? []}
           />
         </aside>

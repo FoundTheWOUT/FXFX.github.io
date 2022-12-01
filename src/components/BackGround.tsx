@@ -35,7 +35,7 @@ function Ring(props: JSX.IntrinsicElements["mesh"]) {
 const BackGround: FC = () => {
   const { height, width } = document.body.getBoundingClientRect();
   return (
-    <div className="w-full h-screen fixed -z-999 bg-gray-100">
+    <div className="fixed -z-999 h-screen w-full bg-gray-100">
       <Canvas>
         <PerspectiveCamera
           makeDefault
@@ -45,8 +45,16 @@ const BackGround: FC = () => {
         />
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
-        <Ring ringArgs={[15, 18, 30]} color="#edb017" position={[-30, 30, 20]} />
-        <Ring ringArgs={[10, 15, 30]} color="#8B5CF6" position={[-30, 30, 20]} />
+        <Ring
+          ringArgs={[15, 18, 30]}
+          color="#edb017"
+          position={[-30, 30, 20]}
+        />
+        <Ring
+          ringArgs={[10, 15, 30]}
+          color="#8B5CF6"
+          position={[-30, 30, 20]}
+        />
         {/* <gridHelper args={[100, 10]} /> */}
         {/* <axesHelper args={[10]} /> */}
         {/* <OrbitControls /> */}
