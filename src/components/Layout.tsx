@@ -55,18 +55,18 @@ const Layout = (props: PropsWithChildren) => {
       }}
     >
       <div
-        className={classNames("min-h-screen px-2 dark:bg-gray-900", {
+        className={classNames("min-h-screen dark:bg-gray-900", {
           "h-screen overflow-hidden": showSideBar,
         })}
       >
         {/* <BackGround /> */}
         <NavBar />
         <SideBar show={showSideBar} setShowSideBar={setShowSideBar} />
-        {props.children}
+        <div className="px-2">{props.children}</div>
         <Footer />
         {/* float icon */}
         <div
-          className="fixed bottom-0 right-0 m-6 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-gold to-purple-500 shadow-lg active:shadow-inner md:invisible"
+          className="fixed bottom-0 right-0 m-6 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-gold to-purple-500 px-2 shadow-lg active:shadow-inner md:invisible"
           onClick={triggerSideBar}
         >
           <FaMonument className="text-2xl text-white" />

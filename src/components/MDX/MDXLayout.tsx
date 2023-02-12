@@ -15,8 +15,8 @@ const MDXPage = ({ children, data }) => {
 
   return (
     <main ref={postRef} className="mx-auto max-w-[80rem]">
-      <section className="my-2 lg:my-6 lg:grid lg:grid-cols-8">
-        <div className="lg:col-span-6 lg:col-start-2">
+      <section className="my-2 xl:my-6 xl:grid xl:grid-cols-8">
+        <div className="xl:col-span-6 xl:col-start-1">
           <h2 className="mb-2 text-3xl font-bold dark:text-white">{title}</h2>
           <div className="flex gap-2 text-sm text-gray-500">
             {/* Created Date */}
@@ -35,8 +35,8 @@ const MDXPage = ({ children, data }) => {
           </div>
         </div>
       </section>
-      <section className="lg:grid lg:grid-cols-8">
-        <article className="prose rounded-lg bg-white p-5 shadow-lg dark:prose-invert dark:bg-gray-800 lg:col-span-6 lg:col-start-2 lg:p-10">
+      <section className="xl:grid xl:grid-cols-8">
+        <article className="prose rounded-lg bg-white p-5 shadow-lg dark:prose-invert dark:bg-gray-800 xl:col-span-7 xl:col-start-1 xl:p-10">
           <MDXProvider components={MDXComponent}>{children}</MDXProvider>
         </article>
         <aside className="ml-2 hidden w-80 xl:block">
