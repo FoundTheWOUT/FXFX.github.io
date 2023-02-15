@@ -60,13 +60,18 @@ const components: MDXComponents = {
       </Link>
     );
   },
-  img: (props) => {
-    const params = new URL(props.src).searchParams;
-    const zoom = params.get("zoom") ?? 100;
+  img: ({ src, ...props }) => {
+    let zoom = 100;
+    if (src.startsWith("http")) {
+      const url = new URL(src);
+      const params = url.searchParams;
+      const _zoom = parseInt(params.get("zoom"), 10);
+      zoom = Number.isNaN(_zoom) ? 100 : _zoom;
+    }
     return (
       <>
         <img
-          src={props.src}
+          src={src}
           decoding="async"
           alt={props.alt}
           style={{ zoom: `${zoom}%` }}
