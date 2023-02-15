@@ -1,7 +1,5 @@
 import Button from "@/components/styled/Button";
-import { Link } from "gatsby";
 import React from "react";
-import { FaArrowDown } from "react-icons/fa";
 
 const Error = () => (
   <div className="flex h-[70vh] flex-col items-center justify-center gap-4 text-lg font-bold dark:text-white">
@@ -10,10 +8,8 @@ const Error = () => (
       <span className="font-thin">|</span>&nbsp;&nbsp;❌ Not Found
     </div>
     <div className="flex flex-col items-center">
-      <FaArrowDown className="animate-bounce" />
-      <Button className="px-2">
-        <Link to="/">Go home</Link>
-      </Button>
+      {/* <FaArrowDown className="animate-bounce" /> */}
+      <Button className="px-2">{/* <Link to="/">Go home</Link> */}</Button>
     </div>
   </div>
 );

@@ -1,10 +1,21 @@
 {
-  "eslint.validate": ["markdown", "mdx"],
+  "eslint.validate": [
+    "markdown",
+    "mdx"
+  ],
   "eslint.options": {
-    "extensions": [".md", ".mdx"]
+    "extensions": [
+      ".md",
+      ".mdx"
+    ]
   },
-  "cSpell.words": ["frontmatter", "treemate"],
+  "cSpell.words": [
+    "frontmatter",
+    "treemate"
+  ],
   "files.associations": {
     "*.css": "tailwindcss"
   },
+  "typescript.tsdk": "node_modules\\.pnpm\\typescript@4.9.5\\node_modules\\typescript\\lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

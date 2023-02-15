@@ -1,9 +1,8 @@
 import classNames from "classnames";
+import Link from "next/link";
 import React, { FC, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
-import { Link } from "gatsby";
 import NightSwitch from "./NightSwitch";
-import { StaticImage } from "gatsby-plugin-image";
 
 interface SideBarProps {
   show: boolean;
@@ -46,7 +45,7 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
       >
         <div className="flex h-full flex-col items-center justify-center gap-4 bg-white dark:bg-gray-700 dark:text-white">
           <div className="flex h-48 w-48 flex-col items-center justify-center">
-            <StaticImage
+            <img
               className="h-20 w-20 translate-y-5 rounded-full border object-cover"
               src="https://www.gravatar.com/avatar/f5ac7b0d2a8c9ad1d58cf61edba08473"
               alt="avatar"
@@ -56,7 +55,7 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
           <div className="flex flex-col items-center gap-2">
             {rightRoute.map((route) => (
               <Link
-                to={route.url}
+                href={route.url}
                 key={route.label}
                 onClick={() => setShowSideBar(false)}
               >

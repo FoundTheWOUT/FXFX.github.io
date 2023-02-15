@@ -1,9 +1,10 @@
 module.exports = {
   root: true,
   extends: [
-    "eslint:recommended",
-    "plugin:node/recommended",
-    "plugin:@typescript-eslint/recommended",
+    // "eslint:recommended",
+    // "plugin:node/recommended",
+    // "plugin:@typescript-eslint/recommended",
+    "next/core-web-vitals",
   ],
   ignorePatterns: ["public/**/*"],
   overrides: [
@@ -20,12 +21,5 @@ module.exports = {
     "node/no-missing-import": "off",
     "node/no-unpublished-import": "off",
     "node/no-unsupported-features/es-syntax": "off",
-    // "node/no-missing-import": [
-    //   "error",
-    //   {
-    //     allowModules: ["types", "estree", "less", "sass", "stylus"],
-    //     tryExtensions: [".ts", ".js", ".jsx", ".tsx", ".d.ts"],
-    //   },
-    // ],
   },
 };

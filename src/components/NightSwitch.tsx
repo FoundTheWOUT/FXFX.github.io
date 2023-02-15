@@ -1,10 +1,24 @@
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import classNames from "classnames";
 import React, { createContext, useContext, useRef, useState } from "react";
-import { FaAdjust, FaLaptop, FaMoon, FaSun } from "react-icons/fa";
 import Button from "./styled/Button";
+import {
+  ComputerDesktopIcon,
+  SunIcon,
+  MoonIcon,
+} from "@heroicons/react/20/solid";
+import cn from "classnames";
 
 export type TColorScheme = "dark" | "light" | "system";
+const modes = [
+  { scheme: "light", icon: SunIcon, text: "Light Mode" },
+  { scheme: "dark", icon: MoonIcon, text: "dark Mode" },
+  {
+    scheme: "system",
+    icon: ComputerDesktopIcon,
+    text: "system Mode",
+  },
+];
 
 export const NightSwitchContext = createContext<{
   scheme: TColorScheme;
@@ -14,9 +28,11 @@ export const NightSwitchContext = createContext<{
 const NightSwitch = () => {
   const selector = useRef(null);
   const [showSelector, setShowSelector] = useState(false);
-  const { setScheme } = useContext(NightSwitchContext);
+  const { scheme, setScheme } = useContext(NightSwitchContext);
 
   useOnClickOutside(selector, () => setShowSelector(false));
+  const Icon = modes.find((mode) => mode.scheme === scheme).icon;
+
   return (
     <>
       <Button
@@ -25,7 +41,24 @@ const NightSwitch = () => {
           setShowSelector(!showSelector);
         }}
       >
-        <FaAdjust className="inline h-5 w-5 text-black dark:text-white" />
+        <ComputerDesktopIcon
+          className={cn(
+            "inline h-5 w-5 text-black dark:text-white",
+            scheme !== "system" && "hidden"
+          )}
+        />
+        <SunIcon
+          className={cn(
+            "inline h-5 w-5 text-black dark:text-white",
+            scheme !== "light" && "hidden"
+          )}
+        />
+        <MoonIcon
+          className={cn(
+            "inline h-5 w-5 text-black dark:text-white",
+            scheme !== "dark" && "hidden"
+          )}
+        />
       </Button>
       <div className="relative dark:text-white">
         <ul
@@ -37,11 +70,7 @@ const NightSwitch = () => {
             }
           )}
         >
-          {[
-            { scheme: "light", icon: <FaSun />, text: "Light Mode" },
-            { scheme: "dark", icon: <FaMoon />, text: "dark Mode" },
-            { scheme: "system", icon: <FaLaptop />, text: "system Mode" },
-          ].map((item) => (
+          {modes.map(({ icon: Icon, ...item }) => (
             <li key={item.scheme}>
               <Button
                 className="flex w-full items-center gap-2 p-1 px-2"
@@ -50,7 +79,7 @@ const NightSwitch = () => {
                   setShowSelector(!showSelector);
                 }}
               >
-                {item.icon}
+                <Icon className="w-5" />
                 {item.text}
               </Button>
             </li>

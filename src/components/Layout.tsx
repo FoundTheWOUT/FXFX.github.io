@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import NavBar from "@/components/NavBar";
 import SideBar from "@/components/SideBar";
-import { FaMonument } from "react-icons/fa";
+// import { FaMonument } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import { NightSwitchContext, TColorScheme } from "@/components/NightSwitch";
 import { useLocalStorage, useMedia } from "react-use";
@@ -69,7 +69,7 @@ const Layout = (props: PropsWithChildren) => {
           className="fixed bottom-0 right-0 m-6 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-gold to-purple-500 px-2 shadow-lg active:shadow-inner md:invisible"
           onClick={triggerSideBar}
         >
-          <FaMonument className="text-2xl text-white" />
+          {/* <FaMonument className="text-2xl text-white" /> */}
         </div>
       </div>
     </NightSwitchContext.Provider>

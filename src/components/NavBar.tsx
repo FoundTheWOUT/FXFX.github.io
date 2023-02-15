@@ -1,14 +1,13 @@
 import React from "react";
-import { FaAddressCard, FaArchive } from "react-icons/fa";
-import { Link } from "gatsby";
 import Button from "./styled/Button";
 import TrackMouse from "./TrackMouse";
 import classNames from "classnames";
 import NightSwitch from "./NightSwitch";
+import Link from "next/link";
 
 const rightRoute = [
-  { label: "Archive", url: "/archive", icon: <FaArchive /> },
-  { label: "About", url: "/about", icon: <FaAddressCard /> },
+  { label: "Archive", url: "/archive" },
+  { label: "About", url: "/about" },
 ];
 
 function NavBar() {
@@ -19,7 +18,7 @@ function NavBar() {
       )}
     >
       <div className="mx-auto flex max-w-[80rem] flex-1 items-center justify-center md:justify-between">
-        <Link to="/">
+        <Link href="/">
           <span className="bg-gradient-to-tl from-gold to-purple-500 bg-clip-text font-extrabold text-transparent">
             FXFX.GRID
           </span>
@@ -30,10 +29,9 @@ function NavBar() {
               <Button className="h-full">
                 <Link
                   className="mx-2 flex h-full items-center gap-1 text-xl font-semibold text-black dark:text-white"
-                  to={route.url}
+                  href={route.url}
                 >
-                  {route.icon}
-                  <span>{route.label}</span>
+                  {route.label}
                 </Link>
               </Button>
             </TrackMouse>

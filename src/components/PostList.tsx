@@ -1,9 +1,16 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
-import Pagination from "@/components/Pagination";
-import SEO from "./Seo";
+// import { Link, graphql } from "gatsby";
+import Pagination, { PageContext } from "@/components/Pagination";
+import Link from "next/link";
+// import SEO from "./Seo";
 
-const PostList = ({ data, pageContext }) => {
+const PostList = ({
+  data,
+  pageContext,
+}: {
+  data: any;
+  pageContext: PageContext;
+}) => {
   const postList = data.allMdx.nodes;
   return (
     <main className="mx-auto max-w-[80rem]">
@@ -11,7 +18,7 @@ const PostList = ({ data, pageContext }) => {
         {postList.map((node) => (
           <Link
             key={node.frontmatter.title}
-            to={node.fields.slug}
+            href={node.fields.slug}
             className="group"
           >
             <div className="relative mb-20 h-60 rounded-lg md:h-96">
@@ -54,27 +61,27 @@ const PostList = ({ data, pageContext }) => {
 
 export default PostList;
 
-export const Head = () => <SEO />;
+// export const Head = () => <SEO />;
 
-export const ListQuery = graphql`
-  query ($skip: Int!, $limit: Int!) {
-    allMdx(
-      filter: { frontmatter: { hide: { ne: true } } }
-      sort: { order: DESC, fields: frontmatter___date }
-      limit: $limit
-      skip: $skip
-    ) {
-      nodes {
-        fields {
-          slug
-        }
-        excerpt(pruneLength: 50)
-        frontmatter {
-          date(formatString: "YYYY-MM-DD")
-          title
-          image
-        }
-      }
-    }
-  }
-`;
+// export const ListQuery = graphql`
+//   query ($skip: Int!, $limit: Int!) {
+//     allMdx(
+//       filter: { frontmatter: { hide: { ne: true } } }
+//       sort: { order: DESC, fields: frontmatter___date }
+//       limit: $limit
+//       skip: $skip
+//     ) {
+//       nodes {
+//         fields {
+//           slug
+//         }
+//         excerpt(pruneLength: 50)
+//         frontmatter {
+//           date(formatString: "YYYY-MM-DD")
+//           title
+//           image
+//         }
+//       }
+//     }
+//   }
+// `;

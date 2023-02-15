@@ -4,35 +4,31 @@
   "private": true,
   "description": "waua-blog-gatsby",
   "author": "FoundTheWOUT",
-  "keywords": [
-    "gatsby"
-  ],
   "scripts": {
-    "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "prepare": "husky install",
-    "lint": "eslint .",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "np": "node script/newPost.js"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.15",
+    "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.1.3",
+    "@next/mdx": "^13.1.6",
     "@tailwindcss/typography": "^0.5.2",
     "classnames": "^2.3.1",
-    "gatsby": "^5.0.1",
-    "gatsby-plugin-image": "^3.0.0",
-    "gatsby-plugin-mdx": "^5.0.0",
-    "gatsby-plugin-postcss": "^6.0.0",
-    "gatsby-plugin-sharp": "^5.0.0",
-    "gatsby-source-filesystem": "^5.0.0",
-    "gatsby-transformer-sharp": "^5.0.0",
+    "dayjs": "^1.11.7",
     "highlight.js": "^11.0.0",
+    "js-yaml": "^4.1.0",
+    "next": "^13.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.2.0",
     "react-transition-group": "^4.4.2",
-    "tailwindcss": "^3.0.15"
+    "remark": "^14.0.2",
+    "remark-parse": "^10.0.1",
+    "tailwindcss": "^3.0.15",
+    "unified": "^10.1.2"
   },
   "devDependencies": {
     "@types/node": "^15.6.1",
@@ -48,25 +44,15 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-mdx": "^2.0.4",
     "eslint-plugin-node": "^11.1.0",
-    "github-slugger": "^1.4.0",
-    "graphql": "^16.6.0",
-    "husky": "^6.0.0",
-    "lint-staged": "^11.0.0",
+    "github-slugger": "^2.0.0",
     "postcss": "^8.3.0",
     "prettier": "^2.3.0",
     "prettier-plugin-tailwindcss": "^0.2.0",
     "react-use": "^17.4.0",
     "remark-gfm": "^1.0.0",
-    "typescript": "^4.7.2",
-    "webpack": "^5.72.1"
-  },
-  "lint-staged": {
-    "./src/**/*.{tsx,js,css,md}": "prettier --write"
+    "typescript": "^4.7.2"
   },
   "engines": {
     "node": ">=16.0.0"
-  },
-  "workspaces": [
-    "plugins/*"
-  ]
+  }
 }
