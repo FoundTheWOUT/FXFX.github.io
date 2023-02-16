@@ -1,15 +1,10 @@
 import PostList from "@/components/PostList";
-import { getAllPosts } from "@/utils/posts";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import { createReadStream, readFileSync } from "fs";
+import { getAllPosts, PostDir } from "@/utils/posts";
+import { createReadStream } from "fs";
 import { join } from "path";
-import { PostDir } from "@/shared";
-import { remark } from "remark";
 import readline from "readline";
 import yaml from "js-yaml";
 import dayjs from "dayjs";
-import Head from "next/head";
 
 function Index({ posts, pageSlug, totalPages }) {
   return (

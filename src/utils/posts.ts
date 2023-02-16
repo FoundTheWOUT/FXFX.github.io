@@ -2,6 +2,7 @@ import { readdirSync } from "fs";
 import { join } from "path";
 import { slug } from "github-slugger";
 
+export const PostDir = join(process.cwd(), "_posts");
 export const getAllPosts = () => {
   const posts = readdirSync(join(process.cwd(), "_posts"));
 

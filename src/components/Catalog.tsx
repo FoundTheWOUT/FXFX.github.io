@@ -1,4 +1,4 @@
-import { header } from "@/types";
+import { header } from "@/type";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import TrackMouse from "./TrackMouse";
