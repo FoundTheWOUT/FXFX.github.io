@@ -18,7 +18,7 @@ image: https://drimagebed.oss-cn-shenzhen.aliyuncs.com/img/homePage_2.png
 >
 > As you can see in the implementation the `print(ln)` functions are not designed to even remotely support a different output mode and are mainly a debug tool.
 
-`println` 是 `Go` 运行时[内建](<(https://go.dev/ref/spec#Bootstrapping)>)的方法，但 `fmt` 这是 Go 团队实现的一个标准库输入输出库。在文档中也指出，这些内建的方法 Go 团队并不保证它们会一直呆在运行时里，极端而言，未来这些函数*可能*会被移除。因此，在生产环境中，我们应该依赖于更稳定，且更强大的 `fmt` 在处理（格式化）各种 I/O。当然，如果只是临时使用，或者是 `debug` 需求，我们也可以放心的使用 `println`。
+`println` 是 `Go` 运行时[内建](https://go.dev/ref/spec#Bootstrapping)的方法，但 `fmt` 这是 Go 团队实现的一个标准库输入输出库。在文档中也指出，这些内建的方法 Go 团队并不保证它们会一直呆在运行时里，极端而言，未来这些函数*可能*会被移除。因此，在生产环境中，我们应该依赖于更稳定，且更强大的 `fmt` 在处理（格式化）各种 I/O。当然，如果只是临时使用，或者是 `debug` 需求，我们也可以放心的使用 `println`。
 
 ## 强大的[`fmt`](https://pkg.go.dev/fmt#Println)
 

@@ -10,16 +10,17 @@ import SideBar from "@/components/SideBar";
 import Footer from "@/components/Footer";
 import { NightSwitchContext, TColorScheme } from "@/components/NightSwitch";
 import { useLocalStorage, useMedia } from "react-use";
-import classNames from "classnames";
 import { Bars3BottomLeftIcon } from "@heroicons/react/24/outline";
 
 const isBrowser = typeof window !== "undefined";
 
 const Layout = (props: PropsWithChildren) => {
   const [showSideBar, setShowSideBar] = useState(false);
+
   const triggerSideBar = () => {
     setShowSideBar(!showSideBar);
   };
+
   const isSystemDark = useMedia(
     "(prefers-color-scheme: dark)",
     isBrowser ? undefined : true
@@ -54,6 +55,10 @@ const Layout = (props: PropsWithChildren) => {
     colorSchemeStorage === "system" && setColorScheme("system");
   }, [setColorScheme, colorSchemeStorage]);
 
+  const handleScroll = () => {
+    if (showSideBar) setShowSideBar(false);
+  };
+
   return (
     <NightSwitchContext.Provider
       value={{
@@ -65,9 +70,9 @@ const Layout = (props: PropsWithChildren) => {
       }}
     >
       <div
-        className={classNames("min-h-screen dark:bg-gray-900", {
-          "h-screen overflow-hidden": showSideBar,
-        })}
+        className="min-h-screen dark:bg-gray-900"
+        onWheel={handleScroll}
+        onTouchMove={handleScroll}
       >
         {/* <BackGround /> */}
         <NavBar />

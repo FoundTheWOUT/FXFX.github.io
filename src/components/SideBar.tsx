@@ -15,7 +15,7 @@ const rightRoute = [
   { label: "About", url: "/about" },
 ];
 
-const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
+function SideBar({ show, setShowSideBar }: SideBarProps) {
   const nodeRef = useRef(null);
 
   return (
@@ -72,6 +72,6 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
       </aside>
     </>
   );
-};
+}
 
 export default SideBar;

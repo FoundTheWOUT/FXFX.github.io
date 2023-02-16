@@ -10,6 +10,7 @@ import { visit } from "unist-util-visit";
 import { toString } from "mdast-util-to-string";
 import { slug } from "github-slugger";
 import Head from "next/head";
+import remarkGfm from "remark-gfm";
 
 function PostPage({ source, headings }) {
   return (
@@ -50,6 +51,7 @@ export async function getStaticProps({ params: { title = null } }) {
     parseFrontmatter: true,
     mdxOptions: {
       remarkPlugins: [
+        remarkGfm,
         [remarkExportHeading, { headings }],
         // patch id
         () => {
