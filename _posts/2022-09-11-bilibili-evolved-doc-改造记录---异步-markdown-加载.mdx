@@ -1,7 +1,7 @@
 ---
 title: bilibili-evolved-doc 改造记录 - 异步 MarkDown 加载
 date: 2022-09-11
-image: images/1662888107811.webp
+image: /images/1662888107811.webp
 ---
 
 最近发现 [bilibili-evolved-doc](https://bilibili-evolved-doc.vercel.app/) 在加载某些页面的时候会花费比较久的时间，便着手考虑能否优化一下。一开始想到的主要原因是网络问题，在应用加载较大页面时，由于花费了一点下载的时间，用户会感受到明显卡顿。随即打算使用 React 18 的新特性 --- [Suspense](https://reactjs.org/docs/react-api.html?#suspense) 组件，在加载时利用简单的动画过渡，减少卡顿感。但后来在改造中发现，令页面卡顿的真凶却另有其人……具体内容将在[真凶](#真凶)章节展开。

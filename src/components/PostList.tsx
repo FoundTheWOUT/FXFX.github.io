@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const PostList = ({ data }: { data: any }) => {
   const postList = data.allMdx.nodes;
@@ -14,9 +15,15 @@ const PostList = ({ data }: { data: any }) => {
           >
             <div className="relative mb-20 h-60 rounded-lg md:h-96">
               {/* image */}
-              <div className="h-full w-full overflow-hidden rounded-lg shadow md:h-4/5 md:w-3/5 lg:w-1/2">
+              <div className="relative h-full w-full overflow-hidden rounded-lg shadow md:h-4/5 md:w-3/5 lg:w-1/2">
                 {node.frontmatter.image ? (
-                  <img
+                  <Image
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 100vw,
+                    (max-width: 1200px) 50vw,
+                    33vw"
+                    priority
                     className="h-full w-full object-cover"
                     decoding="async"
                     src={node.frontmatter.image}

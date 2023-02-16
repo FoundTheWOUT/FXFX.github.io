@@ -32,7 +32,11 @@ const About: FC = () => {
               <div className="text-sm leading-3">Frontend Developer</div>
             </div>
             <div>
-              <a href="https://github.com/FoundTheWOUT" target="_blank">
+              <a
+                href="https://github.com/FoundTheWOUT"
+                rel="noreferrer"
+                target="_blank"
+              >
                 <FaGithub className="h-5 dark:text-white" />
               </a>
             </div>

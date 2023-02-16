@@ -1,4 +1,9 @@
-import React, { PropsWithChildren, useEffect, useState } from "react";
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import NavBar from "@/components/NavBar";
 import SideBar from "@/components/SideBar";
 // import { FaMonument } from "react-icons/fa";
@@ -32,19 +37,22 @@ const Layout = (props: PropsWithChildren) => {
   const [colorSchemeStorage, setColorSchemeStorage] =
     useLocalStorage<TColorScheme>("user-color-scheme", "system", { raw: true });
 
-  const setColorScheme = (scheme: TColorScheme) => {
-    setColorSchemeStorage(scheme);
-    document.documentElement.dataset["theme"] = scheme;
-    if (scheme === "dark" || (scheme === "system" && isSystemDark)) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  };
+  const setColorScheme = useCallback(
+    (scheme: TColorScheme) => {
+      setColorSchemeStorage(scheme);
+      document.documentElement.dataset["theme"] = scheme;
+      if (scheme === "dark" || (scheme === "system" && isSystemDark)) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    },
+    [isSystemDark, setColorSchemeStorage]
+  );
 
   useEffect(() => {
     colorSchemeStorage === "system" && setColorScheme("system");
-  }, [isSystemDark]);
+  }, [setColorScheme, colorSchemeStorage]);
 
   return (
     <NightSwitchContext.Provider

@@ -1,13 +1,10 @@
 import React from "react";
 import Button from "./styled/Button";
-import TrackMouse from "./TrackMouse";
 import classNames from "classnames";
 import NightSwitch from "./NightSwitch";
 import Link from "next/link";
 
-const rightRoute = [
-  { label: "About", url: "/about" },
-];
+const rightRoute = [{ label: "About", url: "/about" }];
 
 function NavBar() {
   return (
@@ -24,16 +21,14 @@ function NavBar() {
         </Link>
         <div className="hidden h-8 items-center md:flex">
           {rightRoute.map((route) => (
-            <TrackMouse key={route.label}>
-              <Button className="h-full">
-                <Link
-                  className="mx-2 flex h-full items-center gap-1 text-xl font-semibold text-black dark:text-white"
-                  href={route.url}
-                >
-                  {route.label}
-                </Link>
-              </Button>
-            </TrackMouse>
+            <Button className="h-full" key={route.label}>
+              <Link
+                className="mx-2 flex h-full items-center gap-1 text-xl font-semibold text-black dark:text-white"
+                href={route.url}
+              >
+                {route.label}
+              </Link>
+            </Button>
           ))}
           <NightSwitch />
         </div>

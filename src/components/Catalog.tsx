@@ -7,7 +7,10 @@ type CatalogProps = JSX.IntrinsicElements["div"] & {
   headings: header[];
 };
 
-const Catalog = React.forwardRef(({ headings, ...rest }: CatalogProps, ref) => {
+const Catalog = React.forwardRef(function CatalogWithRef(
+  { headings, ...rest }: CatalogProps,
+  ref
+) {
   const [CatalogActive, SetCatalogActive] = useState(null);
 
   useEffect(() => {
@@ -27,6 +30,7 @@ const Catalog = React.forwardRef(({ headings, ...rest }: CatalogProps, ref) => {
     return () => {
       document.removeEventListener("scroll", handlePostWheel);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 
   return (

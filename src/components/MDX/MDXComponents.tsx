@@ -17,21 +17,22 @@ const Pre = ({ children }) => {
 type HeaderProps = PropsWithChildren<{ as: string; id: string }>;
 
 const ALink = ({ as, id, children }: HeaderProps) => {
-  return createElement(as, {
-    id,
-    className: "relative mt-2 group",
-    children: (
-      <>
-        <a
-          href={`#${id}`}
-          className="absolute -translate-x-full pr-1 opacity-0 transition-opacity group-hover:opacity-100"
-        >
-          #
-        </a>
-        {children}
-      </>
-    ),
-  });
+  return createElement(
+    as,
+    {
+      id,
+      className: "relative mt-2 group",
+    },
+    <>
+      <a
+        href={`#${id}`}
+        className="absolute -translate-x-full pr-1 opacity-0 transition-opacity group-hover:opacity-100"
+      >
+        #
+      </a>
+      {children}
+    </>
+  );
 };
 
 const components = {
@@ -46,6 +47,7 @@ const components = {
         <a
           href={href}
           target="_blank"
+          rel="noreferrer"
           className="underline decoration-dashed underline-offset-4"
           {...props}
         />

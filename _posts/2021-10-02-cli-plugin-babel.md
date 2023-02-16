@@ -5,7 +5,7 @@ update: 2021-08-10
 tag:
   - vue
   - babel
-image: /images/babel.png
+image: /images/babel.webp
 ---
 
 在[`@vue/cli`](https://cli.vuejs.org/)生成的项目`vue2`项目中, 它会自动的帮助我们完成[`babel`](https://babeljs.io/)的配置.

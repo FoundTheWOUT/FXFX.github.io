@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { FC, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import NightSwitch from "./NightSwitch";
+import Image from "next/image";
 
 interface SideBarProps {
   show: boolean;
@@ -44,8 +45,10 @@ const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {
       >
         <div className="flex h-full flex-col items-center justify-center gap-4 bg-white dark:bg-gray-700 dark:text-white">
           <div className="flex h-48 w-48 flex-col items-center justify-center">
-            <img
-              className="h-20 w-20 translate-y-5 rounded-full border object-cover"
+            <Image
+              width={80}
+              height={80}
+              className="translate-y-5 rounded-full border object-cover"
               src="https://www.gravatar.com/avatar/f5ac7b0d2a8c9ad1d58cf61edba08473"
               alt="avatar"
             />
