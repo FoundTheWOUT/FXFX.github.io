@@ -9,9 +9,9 @@ import { remark } from "remark";
 import readline from "readline";
 import yaml from "js-yaml";
 import dayjs from "dayjs";
+import Head from "next/head";
 
 function Index({ posts, pageSlug, totalPages }) {
-  const currentPage = pageSlug ? parseInt(pageSlug[0]) + 1 : 1;
   return (
     <PostList
       data={{
@@ -22,10 +22,6 @@ function Index({ posts, pageSlug, totalPages }) {
             excerpt,
           })),
         },
-      }}
-      pageContext={{
-        currentPage,
-        postListPages: totalPages,
       }}
     />
   );

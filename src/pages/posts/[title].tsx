@@ -10,19 +10,25 @@ import dayjs from "dayjs";
 import { visit } from "unist-util-visit";
 import { toString } from "mdast-util-to-string";
 import { slug } from "github-slugger";
+import Head from "next/head";
 
 function PostPage({ source, headings }) {
   return (
-    <MDXLayout
-      data={{
-        mdx: {
-          frontmatter: source.frontmatter,
-          headings,
-        },
-      }}
-    >
-      <MDXRemote {...source} components={MDXComponents} />
-    </MDXLayout>
+    <>
+      <Head>
+        <title>{source.frontmatter.title}</title>
+      </Head>
+      <MDXLayout
+        data={{
+          mdx: {
+            frontmatter: source.frontmatter,
+            headings,
+          },
+        }}
+      >
+        <MDXRemote {...source} components={MDXComponents} />
+      </MDXLayout>
+    </>
   );
 }
 

@@ -1,10 +1,5 @@
 import React, { useRef } from "react";
-import { MDXProvider } from "@mdx-js/react";
 import Catalog from "@/components/Catalog";
-import MDXComponent from "./MDXComponents";
-// import { FaCalendarAlt, FaTag } from "react-icons/fa";
-// import { graphql } from "gatsby";
-import SEO from "../Seo";
 import { CalendarIcon, TagIcon } from "@heroicons/react/24/solid";
 
 const MDXPage = ({ children, data }) => {
@@ -53,24 +48,3 @@ const MDXPage = ({ children, data }) => {
 };
 
 export default MDXPage;
-
-// export const Head = ({ pageContext }) => (
-//   <SEO title={pageContext.frontmatter.title} />
-// );
-
-// export const query = graphql`
-//   query ($id: String!) {
-//     mdx(id: { eq: $id }) {
-//       frontmatter {
-//         title
-//         date(formatString: "YYYY-MM-DD")
-//         tags
-//       }
-//       headings {
-//         id
-//         value
-//         depth
-//       }
-//     }
-//   }
-// `;

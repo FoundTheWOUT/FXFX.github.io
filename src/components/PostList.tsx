@@ -1,16 +1,7 @@
 import React from "react";
-// import { Link, graphql } from "gatsby";
-import Pagination, { PageContext } from "@/components/Pagination";
 import Link from "next/link";
-// import SEO from "./Seo";
 
-const PostList = ({
-  data,
-  pageContext,
-}: {
-  data: any;
-  pageContext: PageContext;
-}) => {
+const PostList = ({ data }: { data: any }) => {
   const postList = data.allMdx.nodes;
   return (
     <main className="mx-auto max-w-[80rem]">
@@ -54,7 +45,6 @@ const PostList = ({
           </Link>
         ))}
       </section>
-      {/* <Pagination pageContext={pageContext} /> */}
     </main>
   );
 };
@@ -62,26 +52,3 @@ const PostList = ({
 export default PostList;
 
 // export const Head = () => <SEO />;
-
-// export const ListQuery = graphql`
-//   query ($skip: Int!, $limit: Int!) {
-//     allMdx(
-//       filter: { frontmatter: { hide: { ne: true } } }
-//       sort: { order: DESC, fields: frontmatter___date }
-//       limit: $limit
-//       skip: $skip
-//     ) {
-//       nodes {
-//         fields {
-//           slug
-//         }
-//         excerpt(pruneLength: 50)
-//         frontmatter {
-//           date(formatString: "YYYY-MM-DD")
-//           title
-//           image
-//         }
-//       }
-//     }
-//   }
-// `;
