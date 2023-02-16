@@ -7,7 +7,6 @@ import {
   SunIcon,
   MoonIcon,
 } from "@heroicons/react/20/solid";
-import cn from "classnames";
 
 export type TColorScheme = "dark" | "light" | "system";
 const modes = [
@@ -28,10 +27,9 @@ export const NightSwitchContext = createContext<{
 const NightSwitch = () => {
   const selector = useRef(null);
   const [showSelector, setShowSelector] = useState(false);
-  const { scheme, setScheme } = useContext(NightSwitchContext);
+  const { setScheme } = useContext(NightSwitchContext);
 
   useOnClickOutside(selector, () => setShowSelector(false));
-  const Icon = modes.find((mode) => mode.scheme === scheme).icon;
 
   return (
     <>
@@ -41,24 +39,9 @@ const NightSwitch = () => {
           setShowSelector(!showSelector);
         }}
       >
-        <ComputerDesktopIcon
-          className={cn(
-            "inline h-5 w-5 text-black dark:text-white",
-            scheme !== "system" && "hidden"
-          )}
-        />
-        <SunIcon
-          className={cn(
-            "inline h-5 w-5 text-black dark:text-white",
-            scheme !== "light" && "hidden"
-          )}
-        />
-        <MoonIcon
-          className={cn(
-            "inline h-5 w-5 text-black dark:text-white",
-            scheme !== "dark" && "hidden"
-          )}
-        />
+        <ComputerDesktopIcon className="display-on-system icon hidden" />
+        <SunIcon className="display-on-light icon hidden" />
+        <MoonIcon className="display-on-dark icon hidden" />
       </Button>
       <div className="relative dark:text-white">
         <ul

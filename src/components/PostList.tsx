@@ -44,7 +44,7 @@ const PostList = ({
                     <span className="text-black dark:text-gray-500">
                       {node.frontmatter.date}
                     </span>
-                    <p className="text-sm text-gray-500 dark:text-gray-300">
+                    <p className="break-all text-sm text-gray-500 dark:text-gray-300">
                       {node.excerpt}
                     </p>
                   </div>

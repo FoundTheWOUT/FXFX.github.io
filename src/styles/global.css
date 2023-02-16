@@ -18,6 +18,10 @@
   .tag {
     @apply flex items-center gap-1 rounded bg-white px-2 py-1 text-xs ring-1 ring-gray-300 dark:bg-gray-800 dark:text-gray-400 dark:ring-gray-400;
   }
+
+  .icon{
+    @apply h-5 w-5 text-black dark:text-white
+  }
 }
 
 .fade-enter {
@@ -33,4 +37,14 @@
 .fade-exit-active {
   opacity: 0;
   transition: opacity 300ms;
+}
+
+[data-theme="dark"] .display-on-dark {
+  display: inline;
+}
+[data-theme="light"] .display-on-light {
+  display: inline;
+}
+[data-theme="system"] .display-on-system {
+  display: inline;
 }

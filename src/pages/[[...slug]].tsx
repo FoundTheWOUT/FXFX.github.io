@@ -16,9 +16,10 @@ function Index({ posts, pageSlug, totalPages }) {
     <PostList
       data={{
         allMdx: {
-          nodes: posts.map(({ frontmatter, ...post }) => ({
+          nodes: posts.map(({ frontmatter, excerpt, ...post }) => ({
             fields: { slug: post.slug },
             frontmatter: JSON.parse(frontmatter),
+            excerpt,
           })),
         },
       }}
@@ -60,23 +61,28 @@ export async function getStaticProps({ params: { slug = null } }) {
             const stream = createReadStream(join(PostDir, filePath), "utf-8");
             let readingFrontmatter = false;
             let frontmatter = "";
+            let excerpt = "";
             const rl = readline.createInterface({
               input: stream,
               crlfDelay: Infinity,
             });
             for await (const line of rl) {
-              if (line === "---") {
-                if (readingFrontmatter) {
-                  rl.close();
-                  stream.close();
-                  break;
-                } else {
-                  readingFrontmatter = true;
-                  continue;
-                }
+              if (excerpt.length >= 50) {
+                break;
+              } else if (line === "---") {
+                readingFrontmatter = !readingFrontmatter;
+              } else if (readingFrontmatter) {
+                frontmatter += line + "\n";
+              } else {
+                excerpt += line;
               }
-              frontmatter += line + "\n";
             }
+            if (excerpt.length >= 50) {
+              excerpt = excerpt.slice(0, 70);
+              excerpt += "...";
+            }
+            rl.close();
+            stream.close();
             let frontmatterObj = {} as any;
             try {
               frontmatterObj = yaml.load(frontmatter);
@@ -95,10 +101,10 @@ export async function getStaticProps({ params: { slug = null } }) {
             } catch (error) {
               console.log(error);
             }
-            console.log(frontmatterObj);
             return {
               slug,
               frontmatter: JSON.stringify(frontmatterObj),
+              excerpt,
             };
           })
       ),

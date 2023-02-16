@@ -33,6 +33,7 @@ const Layout = (props: PropsWithChildren) => {
 
   const setColorScheme = (scheme: TColorScheme) => {
     setColorSchemeStorage(scheme);
+    document.documentElement.dataset["theme"] = scheme;
     if (scheme === "dark" || (scheme === "system" && isSystemDark)) {
       document.documentElement.classList.add("dark");
     } else {
