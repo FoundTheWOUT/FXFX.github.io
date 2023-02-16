@@ -46,6 +46,7 @@ function Comp({ action, children }) {
 `App.jsx`
 
 ServerComponent, `fetch("http://localhost:3001")` 时会返回该组件的 Stream
+
 ```jsx
 import { getName } from "actions.js";
 import Comp from "Comp.jsx";
@@ -53,7 +54,9 @@ function App() {
   return <Comp action={getName}>add</Comp>;
 }
 ```
+
 `index.js`
+
 ```jsx
 let data = ReactServerDOMReader.createFromFetch(
   fetch("http://localhost:3001"),
@@ -73,16 +76,15 @@ let data = ReactServerDOMReader.createFromFetch(
 );
 
 function Content() {
-return React.use(data);
+  return React.use(data);
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-
-{" "}
-<Suspense fallback={<h1>Loading...</h1>}>
-  <Content />
-</Suspense>
-); ```
+  <Suspense fallback={<h1>Loading...</h1>}>
+    <Content />
+  </Suspense>
+);
+```
 
 #### 服务端
 

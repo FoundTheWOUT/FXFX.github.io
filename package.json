@@ -1,8 +1,7 @@
 {
-  "name": "waua-blog-gatsby",
+  "name": "waua-blog",
   "version": "1.0.0",
   "private": true,
-  "description": "waua-blog-gatsby",
   "author": "FoundTheWOUT",
   "scripts": {
     "dev": "next dev",
@@ -22,6 +21,7 @@
     "highlight.js": "^11.0.0",
     "js-yaml": "^4.1.0",
     "next": "^13.1.6",
+    "next-mdx-remote": "^4.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-transition-group": "^4.4.2",

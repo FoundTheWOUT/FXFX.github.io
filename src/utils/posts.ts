@@ -9,6 +9,7 @@ export const getAllPosts = () => {
   return posts.map((post) => {
     const filename = post.replace(/\.mdx?$/, "");
     return {
+      fullFilePath: join(process.cwd(), "_posts", post),
       filePath: post,
       slug: slug(filename),
     };

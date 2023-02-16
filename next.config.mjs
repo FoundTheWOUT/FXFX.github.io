@@ -19,6 +19,9 @@ const config = {
   experimental: {
     appDir: true,
   },
+  images: {
+    domains: ["www.gravatar.com"],
+  },
 };
 
 export default withMDX(config);

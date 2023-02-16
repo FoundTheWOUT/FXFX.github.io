@@ -32,32 +32,18 @@ function Index({ posts, pageSlug, totalPages }) {
 }
 
 const pagination = 10;
-export async function getStaticPaths() {
-  const posts = getAllPosts();
-  const paths = new Array(Math.ceil(posts.length / pagination));
-  // frontmatter
-  for (let i = 0; i < paths.length; i++) {
-    paths[i] = {
-      params: {
-        slug: i === 0 ? [] : [i.toString()],
-      },
-    };
-  }
-  return { paths, fallback: false };
-}
 
-export async function getStaticProps({ params: { slug = null } }) {
+export async function getStaticProps() {
   const posts = getAllPosts();
-  const i = slug === null ? 0 : parseInt(slug[0]);
+  // const i = slug === null ? 0 : parseInt(slug[0]);
 
   return {
     props: {
-      pageSlug: slug,
+      // pageSlug: slug,
       totalPages: Math.ceil(posts.length / pagination),
-      posts: await Promise.all(
-        posts
-          .slice(i * pagination, (i + 1) * pagination)
-          .map(async ({ slug, filePath }) => {
+      posts: (
+        await Promise.all(
+          posts.map(async ({ slug, filePath }) => {
             const stream = createReadStream(join(PostDir, filePath), "utf-8");
             let readingFrontmatter = false;
             let frontmatter = "";
@@ -84,8 +70,15 @@ export async function getStaticProps({ params: { slug = null } }) {
             rl.close();
             stream.close();
             let frontmatterObj = {} as any;
+            let originData = 0;
+            let hide = false;
             try {
               frontmatterObj = yaml.load(frontmatter);
+              originData = Number(frontmatterObj.date);
+
+              typeof frontmatterObj.hide === "boolean" &&
+                (hide = frontmatterObj.hide);
+
               frontmatterObj?.date &&
                 Reflect.set(
                   frontmatterObj,
@@ -103,11 +96,18 @@ export async function getStaticProps({ params: { slug = null } }) {
             }
             return {
               slug,
+              hide,
+              date: originData,
               frontmatter: JSON.stringify(frontmatterObj),
               excerpt,
             };
           })
-      ),
+        )
+      )
+        .filter(({ hide }) => !hide)
+        .sort((a, b) => {
+          return b.date - a.date;
+        }),
     },
   };
 }

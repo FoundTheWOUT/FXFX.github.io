@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { NightSwitchContext, TColorScheme } from "@/components/NightSwitch";
 import { useLocalStorage, useMedia } from "react-use";
 import classNames from "classnames";
+import { Bars3BottomLeftIcon } from "@heroicons/react/24/outline";
 
 const isBrowser = typeof window !== "undefined";
 
@@ -70,7 +71,7 @@ const Layout = (props: PropsWithChildren) => {
           className="fixed bottom-0 right-0 m-6 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-gold to-purple-500 px-2 shadow-lg active:shadow-inner md:invisible"
           onClick={triggerSideBar}
         >
-          {/* <FaMonument className="text-2xl text-white" /> */}
+          <Bars3BottomLeftIcon className="w-8 text-white" />
         </div>
       </div>
     </NightSwitchContext.Provider>

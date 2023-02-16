@@ -2,9 +2,10 @@ import React, { useRef } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import Catalog from "@/components/Catalog";
 import MDXComponent from "./MDXComponents";
-import { FaCalendarAlt, FaTag } from "react-icons/fa";
-import { graphql } from "gatsby";
+// import { FaCalendarAlt, FaTag } from "react-icons/fa";
+// import { graphql } from "gatsby";
 import SEO from "../Seo";
+import { CalendarIcon, TagIcon } from "@heroicons/react/24/solid";
 
 const MDXPage = ({ children, data }) => {
   const {
@@ -21,14 +22,14 @@ const MDXPage = ({ children, data }) => {
           <div className="flex gap-2 text-sm text-gray-500">
             {/* Created Date */}
             <time className="tag">
-              <FaCalendarAlt />
+              <CalendarIcon className="w-3" />
               <span>{date}</span>
             </time>
             {/* Tags */}
             {tags &&
               tags.map((tag) => (
                 <div className="tag" key={tag}>
-                  <FaTag />
+                  <TagIcon className="w-3" />
                   {tag}
                 </div>
               ))}
@@ -37,7 +38,7 @@ const MDXPage = ({ children, data }) => {
       </section>
       <section className="xl:grid xl:grid-cols-8">
         <article className="prose rounded-lg bg-white p-5 shadow-lg dark:prose-invert dark:bg-gray-800 xl:col-span-7 xl:col-start-1 xl:p-10">
-          <MDXProvider components={MDXComponent}>{children}</MDXProvider>
+          {children}
         </article>
         <aside className="ml-2 hidden w-80 xl:block">
           <Catalog
@@ -53,23 +54,23 @@ const MDXPage = ({ children, data }) => {
 
 export default MDXPage;
 
-export const Head = ({ pageContext }) => (
-  <SEO title={pageContext.frontmatter.title} />
-);
+// export const Head = ({ pageContext }) => (
+//   <SEO title={pageContext.frontmatter.title} />
+// );
 
-export const query = graphql`
-  query ($id: String!) {
-    mdx(id: { eq: $id }) {
-      frontmatter {
-        title
-        date(formatString: "YYYY-MM-DD")
-        tags
-      }
-      headings {
-        id
-        value
-        depth
-      }
-    }
-  }
-`;
+// export const query = graphql`
+//   query ($id: String!) {
+//     mdx(id: { eq: $id }) {
+//       frontmatter {
+//         title
+//         date(formatString: "YYYY-MM-DD")
+//         tags
+//       }
+//       headings {
+//         id
+//         value
+//         depth
+//       }
+//     }
+//   }
+// `;

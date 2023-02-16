@@ -18,7 +18,7 @@ const PostList = ({
         {postList.map((node) => (
           <Link
             key={node.frontmatter.title}
-            href={node.fields.slug}
+            href={`/posts/${node.fields.slug}`}
             className="group"
           >
             <div className="relative mb-20 h-60 rounded-lg md:h-96">
@@ -54,7 +54,7 @@ const PostList = ({
           </Link>
         ))}
       </section>
-      <Pagination pageContext={pageContext} />
+      {/* <Pagination pageContext={pageContext} /> */}
     </main>
   );
 };

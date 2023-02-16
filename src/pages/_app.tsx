@@ -14,7 +14,6 @@ export default function MyApp({ Component, pageProps }) {
             const mql = window.matchMedia('(prefers-color-scheme: dark)');
             document.documentElement.dataset['theme'] = "system"
             const colorScheme = localStorage['user-color-scheme']
-            console.log(colorScheme)
             if (colorScheme === "dark" || (colorScheme === "system" && mql.matches) || (!colorScheme && mql.matches)) {
               document.documentElement.classList.add("dark");
               document.documentElement.dataset['theme'] = "dark"

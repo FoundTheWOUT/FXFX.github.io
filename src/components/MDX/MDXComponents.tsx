@@ -1,8 +1,7 @@
 import React, { createElement, PropsWithChildren } from "react";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
-import type { MDXComponents } from "mdx/types";
-import { Link } from "gatsby";
+import Link from "next/link";
 
 const Pre = ({ children }) => {
   const { children: code, className } = children.props;
@@ -17,8 +16,8 @@ const Pre = ({ children }) => {
 
 type HeaderProps = PropsWithChildren<{ as: string; id: string }>;
 
-const ALink = ({ as, id, children }: HeaderProps) =>
-  createElement(as, {
+const ALink = ({ as, id, children }: HeaderProps) => {
+  return createElement(as, {
     id,
     className: "relative mt-2 group",
     children: (
@@ -33,8 +32,9 @@ const ALink = ({ as, id, children }: HeaderProps) =>
       </>
     ),
   });
+};
 
-const components: MDXComponents = {
+const components = {
   h1: ({ ...props }: HeaderProps) => <ALink as="h1" {...props} />,
   h2: ({ ...props }: HeaderProps) => <ALink as="h2" {...props} />,
   h3: ({ ...props }: HeaderProps) => <ALink as="h3" {...props} />,
@@ -53,7 +53,7 @@ const components: MDXComponents = {
     }
     return (
       <Link
-        to={href}
+        href={href}
         className="underline decoration-dashed underline-offset-4"
       >
         {props.children}

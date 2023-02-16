@@ -12,7 +12,6 @@ interface SideBarProps {
 const rightRoute = [
   { label: "Home", url: "/" },
   { label: "About", url: "/about" },
-  { label: "Archive", url: "/archive" },
 ];
 
 const SideBar: FC<SideBarProps> = ({ show, setShowSideBar }) => {

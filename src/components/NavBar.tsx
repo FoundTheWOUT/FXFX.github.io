@@ -6,7 +6,6 @@ import NightSwitch from "./NightSwitch";
 import Link from "next/link";
 
 const rightRoute = [
-  { label: "Archive", url: "/archive" },
   { label: "About", url: "/about" },
 ];
 
