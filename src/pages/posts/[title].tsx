@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/utils/posts";
+import { getAllPosts, serializeFrontmatter } from "@/utils/posts";
 import { GetStaticPaths } from "next/types";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
@@ -6,7 +6,6 @@ import { readFileSync } from "fs";
 import MDXComponents from "@/components/MDX/MDXComponents";
 import MDXLayout from "@/components/MDX/MDXLayout";
 import remarkExportHeading from "plugins/remark-export-heading.mjs";
-import dayjs from "dayjs";
 import { visit } from "unist-util-visit";
 import { toString } from "mdast-util-to-string";
 import { slug } from "github-slugger";
@@ -73,12 +72,8 @@ export async function getStaticProps({ params: { title = null } }) {
     },
   });
 
-  mdxSource?.frontmatter.date &&
-    Reflect.set(
-      mdxSource.frontmatter,
-      "date",
-      dayjs(mdxSource?.frontmatter.date).format("YYYY-MM-DD")
-    );
+  mdxSource?.frontmatter &&
+    (mdxSource.frontmatter = serializeFrontmatter(mdxSource?.frontmatter));
 
   return {
     props: {

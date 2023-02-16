@@ -1,5 +1,5 @@
 import PostList from "@/components/PostList";
-import { getAllPosts, PostDir } from "@/utils/posts";
+import { getAllPosts, PostDir, serializeFrontmatter } from "@/utils/posts";
 import { createReadStream } from "fs";
 import { join } from "path";
 import readline from "readline";
@@ -66,22 +66,10 @@ export async function getStaticProps() {
             try {
               frontmatterObj = yaml.load(frontmatter);
               originData = Number(frontmatterObj.date);
+              frontmatterObj = serializeFrontmatter(frontmatterObj);
 
               typeof frontmatterObj.hide === "boolean" &&
                 (hide = frontmatterObj.hide);
-
-              frontmatterObj?.date &&
-                Reflect.set(
-                  frontmatterObj,
-                  "date",
-                  dayjs(frontmatterObj.date).format("YYYY-MM-DD")
-                );
-              frontmatterObj?.updated &&
-                Reflect.set(
-                  frontmatterObj,
-                  "updated",
-                  dayjs(frontmatterObj.updated).format("YYYY-MM-DD")
-                );
             } catch (error) {
               console.log(error);
             }

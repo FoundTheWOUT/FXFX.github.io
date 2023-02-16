@@ -5,10 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch via NPM",
+      "name": "Launch dev",
       "request": "launch",
-      "runtimeArgs": ["run-script", "start"],
-      "runtimeExecutable": "npm",
+      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "pnpm",
       "skipFiles": ["<node_internals>/**"],
       "type": "node"
     }
