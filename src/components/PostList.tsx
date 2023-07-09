@@ -1,9 +1,41 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
-const PostList = ({ data }: { data: any }) => {
+function PostImage({ node }: { node: any }) {
+  const router = useRouter();
+  const rawSrc = node?.frontmatter?.image;
+  const imageSrc =
+    typeof rawSrc === "string"
+      ? rawSrc.startsWith("http")
+        ? rawSrc
+        : `${router.basePath}${rawSrc}`
+      : "";
+  return (
+    <div className="relative h-full w-full overflow-hidden rounded-lg shadow md:h-4/5 md:w-3/5 lg:w-1/2">
+      {node.frontmatter.image ? (
+        <Image
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw,
+      (max-width: 1200px) 50vw,
+      33vw"
+          priority
+          className="h-full w-full object-cover"
+          decoding="async"
+          src={imageSrc}
+        />
+      ) : (
+        <div className="h-full w-full dark:bg-gray-500"></div>
+      )}
+    </div>
+  );
+}
+
+function PostList({ data }: { data: any }) {
   const postList = data.allMdx.nodes;
+
   return (
     <main className="mx-auto max-w-[80rem]">
       <section>
@@ -14,24 +46,7 @@ const PostList = ({ data }: { data: any }) => {
             className="group"
           >
             <div className="relative mb-20 h-60 rounded-lg md:h-96">
-              {/* image */}
-              <div className="relative h-full w-full overflow-hidden rounded-lg shadow md:h-4/5 md:w-3/5 lg:w-1/2">
-                {node.frontmatter.image ? (
-                  <Image
-                    alt=""
-                    fill
-                    sizes="(max-width: 768px) 100vw,
-                    (max-width: 1200px) 50vw,
-                    33vw"
-                    priority
-                    className="h-full w-full object-cover"
-                    decoding="async"
-                    src={node.frontmatter.image}
-                  />
-                ) : (
-                  <div className="h-full w-full dark:bg-gray-500"></div>
-                )}
-              </div>
+              <PostImage node={node} />
               {/* title */}
               <div className="absolute -bottom-10 box-border h-36 w-full px-3 md:-bottom-0 md:right-0 md:h-3/5 md:w-3/5 md:px-0 lg:right-0 ">
                 <div className="flex h-full transform items-center justify-center rounded-lg bg-white p-3 transition group-hover:-translate-y-5 group-hover:shadow-2xl group-active:shadow-none dark:bg-gray-700 dark:hover:shadow-gray-800">
@@ -54,8 +69,6 @@ const PostList = ({ data }: { data: any }) => {
       </section>
     </main>
   );
-};
+}
 
 export default PostList;
-
-// export const Head = () => <SEO />;
