@@ -37,7 +37,7 @@ function PostList({ data }: { data: any }) {
   const postList = data.allMdx.nodes;
 
   return (
-    <main className="mx-auto max-w-[80rem]">
+    <main className="mx-auto max-w-6xl">
       <section>
         {postList.map((node) => (
           <Link

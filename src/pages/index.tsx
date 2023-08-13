@@ -4,7 +4,6 @@ import { createReadStream } from "fs";
 import { join } from "path";
 import readline from "readline";
 import yaml from "js-yaml";
-import dayjs from "dayjs";
 
 function Index({ posts, pageSlug, totalPages }) {
   return (

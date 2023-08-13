@@ -29,7 +29,7 @@ const About: FC = () => {
           <div className="flex flex-col dark:text-white">
             <div className="mb-auto">
               <div className="mb-1 text-lg font-bold leading-4">Waua</div>
-              <div className="text-sm leading-3">Frontend Developer</div>
+              <div className="text-sm leading-3">♂ | Frontend Developer</div>
             </div>
             <div>
               <a
@@ -44,23 +44,16 @@ const About: FC = () => {
         </div>
 
         {/* music */}
-        <div>
-          <span className="font-bold text-green-500">
-            My Spotify Discover Weekly
-          </span>
-          <Suspense fallback={<div>hi</div>}>
-            <iframe
-              // style="border-radius:12px"
-              className="rounded-xl"
-              src="https://open.spotify.com/embed/playlist/37i9dQZEVXcP7t7XFBksyP?utm_source=generator"
-              width="100%"
-              height="380"
-              frameBorder="0"
-              // allowfullscreen=""
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            ></iframe>
-          </Suspense>
-        </div>
+        <Suspense>
+          <iframe
+            className="rounded-xl"
+            src="https://open.spotify.com/embed/playlist/37i9dQZEVXcP7t7XFBksyP?utm_source=generator"
+            width="100%"
+            height="380"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          ></iframe>
+        </Suspense>
       </div>
     </div>
   );

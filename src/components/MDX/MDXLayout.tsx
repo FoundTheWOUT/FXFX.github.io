@@ -10,7 +10,7 @@ const MDXPage = ({ children, data }) => {
   const postRef = useRef(null);
 
   return (
-    <main ref={postRef} className="mx-auto max-w-[80rem]">
+    <main ref={postRef} className="mx-auto max-w-4xl">
       <section className="my-2 xl:my-6 xl:grid xl:grid-cols-8">
         <div className="xl:col-span-6 xl:col-start-1">
           <h2 className="mb-2 text-3xl font-bold dark:text-white">{title}</h2>
@@ -32,7 +32,7 @@ const MDXPage = ({ children, data }) => {
         </div>
       </section>
       <section className="xl:grid xl:grid-cols-8">
-        <article className="prose rounded-lg bg-white p-5 shadow-lg dark:prose-invert dark:bg-gray-800 xl:col-span-7 xl:col-start-1 xl:p-10">
+        <article className="prose dark:prose-invert xl:col-span-7 xl:col-start-1">
           {children}
         </article>
         <aside className="ml-2 hidden w-80 xl:block">
