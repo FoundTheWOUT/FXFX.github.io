@@ -97,7 +97,7 @@ export default function liftUpProps(propsName = []) {
 
 在新框架即将完成之际，依然能发现一些页面需要加载很久才能完成渲染，这在 SSG 模式下是不应该的，由于整个 HTML 在构建阶段已经生成，另外是在本地开发，网络应该不是问题才对，这让我非常疑惑。这让我不得不怀疑是在客户端阶段，在用户获取到页面后因为一些什么原因导致的卡顿。
 
-![性能测试结果](https://drimagebed.oss-cn-shenzhen.aliyuncs.com/img/performance.webp)
+![性能测试结果](/images/performance.webp)
 
 What... highlight 居然使用了这么长的时间。看来文档采用客户端高亮代码的形式才是问题的关键所在。当一个 MarkDown 较大，代码内容较多时，高亮库花费巨量的时间分析以及重新生成 HTML 模板，导致了性能的严重下降。
 

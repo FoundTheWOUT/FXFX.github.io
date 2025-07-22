@@ -3,7 +3,7 @@ title: Golang 中的 fmt 是什么鬼
 date: 2022-01-23
 tag:
   - golang
-image: https://drimagebed.oss-cn-shenzhen.aliyuncs.com/img/homePage_2.png
+image: /images/homePage_2.png
 ---
 
 ## `println` 与 `fmt.Println`

@@ -22,8 +22,6 @@ const config = {
   images: {
     domains: [
       "www.gravatar.com",
-      "drimagebed.oss-cn-shenzhen.aliyuncs.com",
-      "source.unsplash.com",
     ],
   },
 };
