@@ -16,9 +16,6 @@ const withMDX = mdx({
 /** @type {import('next').NextConfig} */
 const config = {
   pageExtensions: ["tsx", "md", "mdx"],
-  experimental: {
-    appDir: true,
-  },
   images: {
     domains: [
       "www.gravatar.com",
